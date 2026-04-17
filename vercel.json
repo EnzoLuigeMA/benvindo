@@ -1,0 +1,7 @@
+{
+  "routes": [
+    { "src": "/", "dest": "/benvindo-bio.html" },
+    { "src": "/cardapio", "dest": "/cardapio.html" },
+    { "src": "/carta-de-vinhos", "dest": "/carta-de-vinhos.html" }
+  ]
+}
