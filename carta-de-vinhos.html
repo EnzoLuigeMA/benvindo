@@ -1,0 +1,1487 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Carta de Vinhos · Restaurante Benvindo</title>
+<meta name="description" content="Carta de vinhos do Restaurante Benvindo — mais de 60 rótulos selecionados. Champagnes, espumantes, brancos, rosés e tintos.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Cinzel:wght@400;500&family=Lato:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0a0a0a;
+    --black-soft: #111111;
+    --black-card: #141414;
+    --black-card2: #191919;
+    --gold: #c9a84c;
+    --gold-light: #e2c27d;
+    --gold-dim: rgba(201,168,76,0.18);
+    --white: #f5f0e8;
+    --white-dim: rgba(245,240,232,0.6);
+    --white-subtle: rgba(245,240,232,0.08);
+    --border: rgba(201,168,76,0.18);
+    --border-hover: rgba(201,168,76,0.45);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
+    min-height: 100vh;
+  }
+
+  /* grain */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.5;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 52px 24px 36px;
+    border-bottom: 1px solid var(--border);
+    animation: fadeDown 0.8s ease both;
+  }
+
+  .back-btn {
+    position: absolute;
+    left: 20px;
+    top: 52px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    font-family: 'Cinzel', serif;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    text-decoration: none;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+  }
+  .back-btn:hover { opacity: 1; }
+
+  .header-eyebrow {
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--gold);
+    opacity: 0.65;
+    margin-bottom: 10px;
+  }
+
+  .header-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 36px;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--white);
+    line-height: 1.1;
+    margin-bottom: 10px;
+  }
+
+  .header-sub {
+    font-size: 12px;
+    font-weight: 300;
+    color: var(--white-dim);
+    letter-spacing: 0.08em;
+  }
+
+  .header-divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 20px auto 0;
+    max-width: 220px;
+  }
+  .hdl { flex:1; height:1px; background: linear-gradient(90deg, transparent, var(--gold), transparent); opacity: 0.3; }
+  .hdd { width: 5px; height: 5px; background: var(--gold); transform: rotate(45deg); opacity: 0.5; }
+
+  /* ── FILTER TABS ── */
+  .filter-wrap {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: rgba(10,10,10,0.96);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 16px;
+    animation: fadeDown 0.8s 0.1s ease both;
+  }
+
+  .filter-tabs {
+    display: flex;
+    gap: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+    max-width: 640px;
+    margin: 0 auto;
+  }
+  .filter-tabs::-webkit-scrollbar { display: none; }
+
+  .tab {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    padding: 14px 16px;
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--white-dim);
+    border: none;
+    background: none;
+    cursor: pointer;
+    white-space: nowrap;
+    position: relative;
+    transition: color 0.25s;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+  }
+
+  .tab.active {
+    color: var(--gold-light);
+    border-bottom-color: var(--gold);
+  }
+
+  .tab:hover:not(.active) { color: var(--white); }
+
+  .tab-dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* ── CONTENT ── */
+  .content {
+    position: relative;
+    z-index: 1;
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 0 16px 64px;
+  }
+
+  /* ── SECTION ── */
+  .section {
+    display: none;
+    animation: fadeUp 0.4s ease both;
+  }
+  .section.active { display: block; }
+
+  .subsection { margin-bottom: 8px; }
+
+  .subsection-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 22px 4px 12px;
+  }
+
+  .country-flag {
+    font-size: 18px;
+    line-height: 1;
+  }
+
+  .country-name {
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--gold);
+    opacity: 0.75;
+  }
+
+  .country-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, var(--border), transparent);
+  }
+
+  /* ── WINE ITEM ── */
+  .wine-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 13px 16px;
+    background: var(--black-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    margin-bottom: 8px;
+    transition: all 0.25s ease;
+  }
+
+  .wine-item:hover {
+    border-color: var(--border-hover);
+    background: var(--black-card2);
+    transform: translateX(3px);
+  }
+
+  .wine-color-bar {
+    width: 3px;
+    border-radius: 99px;
+    flex-shrink: 0;
+    align-self: stretch;
+    min-height: 36px;
+  }
+
+  .wine-info { flex: 1; min-width: 0; }
+
+  .wine-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--white);
+    line-height: 1.2;
+    margin-bottom: 3px;
+  }
+
+  .wine-grapes {
+    font-size: 11px;
+    font-weight: 300;
+    color: var(--white-dim);
+    letter-spacing: 0.03em;
+    line-height: 1.4;
+    margin-bottom: 3px;
+  }
+
+  .wine-region {
+    font-size: 10px;
+    color: rgba(245,240,232,0.38);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    font-family: 'Cinzel', serif;
+  }
+
+  .wine-price {
+    text-align: right;
+    flex-shrink: 0;
+  }
+
+  .wine-price-label {
+    font-size: 10px;
+    color: rgba(201,168,76,0.45);
+    letter-spacing: 0.05em;
+    margin-bottom: 2px;
+    font-family: 'Cinzel', serif;
+  }
+
+  .wine-price-value {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 19px;
+    font-weight: 500;
+    color: var(--gold-light);
+    line-height: 1;
+    white-space: nowrap;
+  }
+
+  .wine-badge {
+    display: inline-block;
+    font-size: 9px;
+    font-family: 'Cinzel', serif;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 2px 8px;
+    border-radius: 20px;
+    margin-top: 5px;
+  }
+
+  .badge-special { background: rgba(201,168,76,0.15); color: var(--gold); border: 1px solid rgba(201,168,76,0.35); }
+  .badge-organic { background: rgba(60,150,60,0.12); color: #7ec97e; border: 1px solid rgba(100,180,100,0.3); }
+  .badge-sem-alcool { background: rgba(120,180,220,0.12); color: #90c4de; border: 1px solid rgba(120,180,220,0.3); }
+
+  /* COLORS */
+  .c-champagne { background: linear-gradient(180deg, #e8d070, #c9a84c); }
+  .c-espumante { background: linear-gradient(180deg, #e0e8b0, #a8c060); }
+  .c-branco    { background: linear-gradient(180deg, #e8e0a0, #c0b060); }
+  .c-rose      { background: linear-gradient(180deg, #e8a0a0, #c06880); }
+  .c-tinto     { background: linear-gradient(180deg, #8a2040, #600028); }
+  .c-sobremesa { background: linear-gradient(180deg, #d08030, #a05018); }
+
+  /* ── SIZE WINES ── */
+  .size-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--white-dim);
+    padding: 6px 12px;
+    background: var(--white-subtle);
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    margin: 10px 0 10px;
+  }
+
+  /* ── FOOTER ── */
+  .page-footer {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 32px 24px;
+    border-top: 1px solid var(--border);
+  }
+
+  .page-footer-name {
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: rgba(201,168,76,0.4);
+    margin-bottom: 6px;
+  }
+  .page-footer-sub {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 12px;
+    font-style: italic;
+    color: rgba(245,240,232,0.25);
+  }
+
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-14px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <a href="benvindo-bio.html" class="back-btn">
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+      <polyline points="15 18 9 12 15 6"/>
+    </svg>
+    Voltar
+  </a>
+  <div class="header-eyebrow">Restaurante Benvindo</div>
+  <div class="header-title">Carta de Vinhos</div>
+  <div class="header-sub">Seleção cuidadosa de mais de 60 rótulos</div>
+  <div class="header-divider">
+    <div class="hdl"></div>
+    <div class="hdd"></div>
+    <div class="hdl"></div>
+  </div>
+</div>
+
+<!-- FILTER TABS -->
+<div class="filter-wrap">
+  <div class="filter-tabs">
+    <button class="tab active" onclick="showSection('champagne', this)">
+      <span class="tab-dot c-champagne"></span>Champagne
+    </button>
+    <button class="tab" onclick="showSection('espumante', this)">
+      <span class="tab-dot c-espumante"></span>Espumantes
+    </button>
+    <button class="tab" onclick="showSection('branco', this)">
+      <span class="tab-dot c-branco"></span>Brancos
+    </button>
+    <button class="tab" onclick="showSection('rose', this)">
+      <span class="tab-dot c-rose"></span>Rosés
+    </button>
+    <button class="tab" onclick="showSection('tinto', this)">
+      <span class="tab-dot c-tinto"></span>Tintos
+    </button>
+    <button class="tab" onclick="showSection('outros', this)">
+      <span class="tab-dot c-sobremesa"></span>Especiais
+    </button>
+  </div>
+</div>
+
+<div class="content">
+
+  <!-- CHAMPAGNE -->
+  <div class="section active" id="champagne">
+    <div class="subsection">
+      <div class="subsection-header">
+        <span class="country-flag">🇫🇷</span>
+        <span class="country-name">França</span>
+        <div class="country-line"></div>
+      </div>
+
+      <div class="wine-item">
+        <div class="wine-color-bar c-champagne"></div>
+        <div class="wine-info">
+          <div class="wine-name">Dom Pérignon Vintage 2012 Brut</div>
+          <div class="wine-grapes">Chardonnay e Pinot Noir</div>
+          <div class="wine-region">Champagne</div>
+          <span class="wine-badge badge-special">Cuvée Especial</span>
+        </div>
+        <div class="wine-price">
+          <div class="wine-price-label">R$</div>
+          <div class="wine-price-value">3.499</div>
+        </div>
+      </div>
+
+      <div class="wine-item">
+        <div class="wine-color-bar c-champagne"></div>
+        <div class="wine-info">
+          <div class="wine-name">Moët & Chandon Brut Impérial</div>
+          <div class="wine-grapes">Pinot Noir, Pinot Meunier e Chardonnay</div>
+          <div class="wine-region">Champagne</div>
+        </div>
+        <div class="wine-price">
+          <div class="wine-price-label">R$</div>
+          <div class="wine-price-value">889</div>
+        </div>
+      </div>
+
+      <div class="wine-item">
+        <div class="wine-color-bar c-champagne"></div>
+        <div class="wine-info">
+          <div class="wine-name">Veuve Clicquot Ponsardin Brut</div>
+          <div class="wine-grapes">Pinot Noir, Pinot Meunier e Chardonnay</div>
+          <div class="wine-region">Champagne</div>
+        </div>
+        <div class="wine-price">
+          <div class="wine-price-label">R$</div>
+          <div class="wine-price-value">949</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ESPUMANTES -->
+  <div class="section" id="espumante">
+
+    <!-- BRASIL -->
+    <div class="subsection">
+      <div class="subsection-header">
+        <span class="country-flag">🇧🇷</span>
+        <span class="country-name">Brasil</span>
+        <div class="country-line"></div>
+      </div>
+
+      <div class="wine-item">
+        <div class="wine-color-bar c-espumante"></div>
+        <div class="wine-info">
+          <div class="wine-name">Viva La Vida Brut</div>
+          <div class="wine-grapes">Chardonnay</div>
+          <div class="wine-region">Serra Gaúcha</div>
+        </div>
+        <div class="wine-price">
+          <div class="wine-price-label">R$</div>
+          <div class="wine-price-value">139</div>
+        </div>
+      </div>
+
+      <div class="wine-item">
+        <div class="wine-color-bar c-espumante"></div>
+        <div class="wine-info">
+          <div class="wine-name">Chandon Rêserve Brut</div>
+          <div class="wine-grapes">Pinot Noir (35%), Riesling Itálico (35%), Chardonnay (30%)</div>
+          <div class="wine-region">Serra Gaúcha</div>
+        </div>
+        <div class="wine-price">
+          <div class="wine-price-label">R$</div>
+          <div class="wine-price-value">230</div>
+        </div>
+      </div>
+
+      <div class="wine-item">
+        <div class="wine-color-bar c-espumante"></div>
+        <div class="wine-info">
+          <div class="wine-name">Valmarino Brut</div>
+          <div class="wine-grapes">Espumante branco</div>
+          <div class="wine-region">Serra Gaúcha</div>
+        </div>
+        <div class="wine-price">
+          <div class="wine-price-label">R$</div>
+          <div class="wine-price-value">149</div>
+        </div>
+      </div>
+
+      <div class="wine-item">
+        <div class="wine-color-bar c-espumante"></div>
+        <div class="wine-info">
+          <div class="wine-name">Chuva de Prata</div>
+          <div class="wine-grapes">Sem álcool</div>
+          <div class="wine-region">Brasil</div>
+          <span class="wine-badge badge-sem-alcool">Sem Álcool</span>
+        </div>
+        <div class="wine-price">
+          <div class="wine-price-label">R$</div>
+          <div class="wine-price-value">49</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CHILE -->
+    <div class="subsection">
+      <div class="subsection-header">
+        <span class="country-flag">🇨🇱</span>
+        <span class="country-name">Chile</span>
+        <div class="country-line"></div>
+      </div>
+      <div class="wine-item">
+        <div class="wine-color-bar c-espumante"></div>
+        <div class="wine-info">
+          <div class="wine-name">Santa Carolina Brut</div>
+          <div class="wine-grapes">Chardonnay</div>
+          <div class="wine-region">Vale Central</div>
+        </div>
+        <div class="wine-price">
+          <div class="wine-price-label">R$</div>
+          <div class="wine-price-value">139</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FRANÇA -->
+    <div class="subsection">
+      <div class="subsection-header">
+        <span class="country-flag">🇫🇷</span>
+        <span class="country-name">França</span>
+        <div class="country-line"></div>
+      </div>
+      <div class="wine-item">
+        <div class="wine-color-bar c-espumante"></div>
+        <div class="wine-info">
+          <div class="wine-name">Romance Brut Blanc de Blanc</div>
+          <div class="wine-grapes">Branco espumante</div>
+          <div class="wine-region">Cave de Die</div>
+        </div>
+        <div class="wine-price">
+          <div class="wine-price-label">R$</div>
+          <div class="wine-price-value">159</div>
+        </div>
+      </div>
+      <div class="wine-item">
+        <div class="wine-color-bar c-espumante"></div>
+        <div class="wine-info">
+          <div class="wine-name">Veuve du Vernay Brut</div>
+          <div class="wine-grapes">Colombard (40%), Sauvignon Blanc (40%), Chardonnay (20%)</div>
+          <div class="wine-region">Borgonha</div>
+        </div>
+        <div class="wine-price">
+          <div class="wine-price-label">R$</div>
+          <div class="wine-price-value">169</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PORTUGAL -->
+    <div class="subsection">
+      <div class="subsection-header">
+        <span class="country-flag">🇵🇹</span>
+        <span class="country-name">Portugal</span>
+        <div class="country-line"></div>
+      </div>
+      <div class="wine-item">
+        <div class="wine-color-bar c-espumante"></div>
+        <div class="wine-info">
+          <div class="wine-name">Villa Rosa Blanc de Noirs Extra Brut</div>
+          <div class="wine-grapes">Baga</div>
+          <div class="wine-region">Bairrada</div>
+        </div>
+        <div class="wine-price">
+          <div class="wine-price-label">R$</div>
+          <div class="wine-price-value">159</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ESPANHA -->
+    <div class="subsection">
+      <div class="subsection-header">
+        <span class="country-flag">🇪🇸</span>
+        <span class="country-name">Espanha</span>
+        <div class="country-line"></div>
+      </div>
+      <div class="wine-item">
+        <div class="wine-color-bar c-espumante"></div>
+        <div class="wine-info">
+          <div class="wine-name">Cava Pata Negra Brut</div>
+          <div class="wine-grapes">Espumante</div>
+          <div class="wine-region">Galicia</div>
+        </div>
+        <div class="wine-price">
+          <div class="wine-price-label">R$</div>
+          <div class="wine-price-value">169</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BRANCOS -->
+  <div class="section" id="branco">
+
+    <!-- ARGENTINA -->
+    <div class="subsection">
+      <div class="subsection-header">
+        <span class="country-flag">🇦🇷</span>
+        <span class="country-name">Argentina</span>
+        <div class="country-line"></div>
+      </div>
+      <div class="wine-item">
+        <div class="wine-color-bar c-branco"></div>
+        <div class="wine-info">
+          <div class="wine-name">El Enemigo Chardonnay</div>
+          <div class="wine-grapes">Chardonnay</div>
+          <div class="wine-region">Mendoza</div>
+          <span class="wine-badge badge-special">Premium</span>
+        </div>
+        <div class="wine-price">
+          <div class="wine-price-label">R$</div>
+          <div class="wine-price-value">319</div>
+        </div>
+      </div>
+      <div class="wine-item">
+        <div class="wine-color-bar c-branco"></div>
+        <div class="wine-info">
+          <div class="wine-name">DV Catena Chardonnay</div>
+          <div class="wine-grapes">Chardonnay</div>
+          <div class="wine-region">Mendoza</div>
+        </div>
+        <div class="wine-price">
+          <div class="wine-price-label">R$</div>
+          <div class="wine-price-value">230</div>
+        </div>
+      </div>
+      <div class="wine-item">
+        <div class="wine-color-bar c-branco"></div>
+        <div class="wine-info">
+          <div class="wine-name">Estancia Mendoza</div>
+          <div class="wine-grapes">Chardonnay e Chenin</div>
+          <div class="wine-region">Mendoza</div>
+        </div>
+        <div class="wine-price">
+          <div class="wine-price-label">R$</div>
+          <div class="wine-price-value">109</div>
+        </div>
+      </div>
+      <div class="wine-item">
+        <div class="wine-color-bar c-branco"></div>
+        <div class="wine-info">
+          <div class="wine-name">Sexy Fish</div>
+          <div class="wine-grapes">Chardonnay e Torrontes</div>
+          <div class="wine-region">Mendoza</div>
+        </div>
+        <div class="wine-price">
+          <div class="wine-price-label">R$</div>
+          <div class="wine-price-value">139</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CHILE -->
+    <div class="subsection">
+      <div class="subsection-header">
+        <span class="country-flag">🇨🇱</span>
+        <span class="country-name">Chile</span>
+        <div class="country-line"></div>
+      </div>
+      <div class="wine-item">
+        <div class="wine-color-bar c-branco"></div>
+        <div class="wine-info">
+          <div class="wine-name">Viña Casa Blanca Céfiro</div>
+          <div class="wine-grapes">Sauvignon Blanc</div>
+          <div class="wine-region">Vale Casablanca</div>
+        </div>
+        <div class="wine-price">
+          <div class="wine-price-label">R$</div>
+          <div class="wine-price-value">149</div>
+        </div>
+      </div>
+      <div class="wine-item">
+        <div class="wine-color-bar c-branco"></div>
+        <div class="wine-info">
+          <div class="wine-name">Bicicleta Reserva Chardonnay</div>
+          <div class="wine-grapes">Chardonnay</div>
+          <div class="wine-region">Vale Central</div>
+        </div>
+        <div class="wine-price">
+          <div class="wine-price-label">R$</div>
+          <div class="wine-price-value">159</div>
+        </div>
+      </div>
+      <div class="wine-item">
+        <div class="wine-color-bar c-branco"></div>
+        <div class="wine-info">
+          <div class="wine-name">Destemido Sauvignon Blanc</div>
+          <div class="wine-grapes">Sauvignon Blanc</div>
+          <div class="wine-region">Vale Central</div>
+        </div>
+        <div class="wine-price">
+          <div class="wine-price-label">R$</div>
+          <div class="wine-price-value">139</div>
+        </div>
+      </div>
+      <div class="wine-item">
+        <div class="wine-color-bar c-branco"></div>
+        <div class="wine-info">
+          <div class="wine-name">Santa Villa Único Chardonnay</div>
+          <div class="wine-grapes">Chardonnay</div>
+          <div class="wine-region">Vale Central</div>
+        </div>
+        <div class="wine-price">
+          <div class="wine-price-label">R$</div>
+          <div class="wine-price-value">99</div>
+        </div>
+      </div>
+      <div class="wine-item">
+        <div class="wine-color-bar c-branco"></div>
+        <div class="wine-info">
+          <div class="wine-name">Santa Villa Único Sauvignon Blanc</div>
+          <div class="wine-grapes">Sauvignon Blanc</div>
+          <div class="wine-region">Vale Central</div>
+        </div>
+        <div class="wine-price">
+          <div class="wine-price-label">R$</div>
+          <div class="wine-price-value">99</div>
+        </div>
+      </div>
+      <div class="wine-item">
+        <div class="wine-color-bar c-branco"></div>
+        <div class="wine-info">
+          <div class="wine-name">Adobe Reserva Chardonnay</div>
+          <div class="wine-grapes">Chardonnay</div>
+          <div class="wine-region">Vale Central</div>
+        </div>
+        <div class="wine-price">
+          <div class="wine-price-label">R$</div>
+          <div class="wine-price-value">169</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ALEMANHA -->
+    <div class="subsection">
+      <div class="subsection-header">
+        <span class="country-flag">🇩🇪</span>
+        <span class="country-name">Alemanha</span>
+        <div class="country-line"></div>
+      </div>
+      <div class="wine-item">
+        <div class="wine-color-bar c-branco"></div>
+        <div class="wine-info">
+          <div class="wine-name">OH 01 Riesling Dry</div>
+          <div class="wine-grapes">Riesling</div>
+          <div class="wine-region">Rhein</div>
+        </div>
+        <div class="wine-price">
+          <div class="wine-price-label">R$</div>
+          <div class="wine-price-value">199</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FRANÇA -->
+    <div class="subsection">
+      <div class="subsection-header">
+        <span class="country-flag">🇫🇷</span>
+        <span class="country-name">França</span>
+        <div class="country-line"></div>
+      </div>
+      <div class="wine-item">
+        <div class="wine-color-bar c-branco"></div>
+        <div class="wine-info">
+          <div class="wine-name">Chablis</div>
+          <div class="wine-grapes">Chardonnay</div>
+          <div class="wine-region">Borgonha</div>
+          <span class="wine-badge badge-special">Grand Cru</span>
+        </div>
+        <div class="wine-price">
+          <div class="wine-price-label">R$</div>
+          <div class="wine-price-value">519</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- NOVA ZELÂNDIA -->
+    <div class="subsection">
+      <div class="subsection-header">
+        <span class="country-flag">🇳🇿</span>
+        <span class="country-name">Nova Zelândia</span>
+        <div class="country-line"></div>
+      </div>
+      <div class="wine-item">
+        <div class="wine-color-bar c-branco"></div>
+        <div class="wine-info">
+          <div class="wine-name">Echo Bay Sauvignon Blanc</div>
+          <div class="wine-grapes">Sauvignon Blanc</div>
+          <div class="wine-region">Marlborough</div>
+        </div>
+        <div class="wine-price">
+          <div class="wine-price-label">R$</div>
+          <div class="wine-price-value">259</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PORTUGAL -->
+    <div class="subsection">
+      <div class="subsection-header">
+        <span class="country-flag">🇵🇹</span>
+        <span class="country-name">Portugal</span>
+        <div class="country-line"></div>
+      </div>
+      <div class="wine-item">
+        <div class="wine-color-bar c-branco"></div>
+        <div class="wine-info">
+          <div class="wine-name">Invasor Colheita</div>
+          <div class="wine-grapes">Viosinho, Rabigato, Arinto e Verdelho</div>
+          <div class="wine-region">Douro</div>
+        </div>
+        <div class="wine-price">
+          <div class="wine-price-label">R$</div>
+          <div class="wine-price-value">189</div>
+        </div>
+      </div>
+      <div class="wine-item">
+        <div class="wine-color-bar c-branco"></div>
+        <div class="wine-info">
+          <div class="wine-name">Cartuxa Pêra Manca</div>
+          <div class="wine-grapes">Antão Vaz</div>
+          <div class="wine-region">Alentejo</div>
+          <span class="wine-badge badge-special">Ícone Português</span>
+        </div>
+        <div class="wine-price">
+          <div class="wine-price-label">R$</div>
+          <div class="wine-price-value">799</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ITÁLIA -->
+    <div class="subsection">
+      <div class="subsection-header">
+        <span class="country-flag">🇮🇹</span>
+        <span class="country-name">Itália</span>
+        <div class="country-line"></div>
+      </div>
+      <div class="wine-item">
+        <div class="wine-color-bar c-branco"></div>
+        <div class="wine-info">
+          <div class="wine-name">Burdizzo Frascati</div>
+          <div class="wine-grapes">Blend branco</div>
+          <div class="wine-region">Lazio</div>
+        </div>
+        <div class="wine-price">
+          <div class="wine-price-label">R$</div>
+          <div class="wine-price-value">179</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROSÉS -->
+  <div class="section" id="rose">
+
+    <!-- AFRICA DO SUL -->
+    <div class="subsection">
+      <div class="subsection-header">
+        <span class="country-flag">🇿🇦</span>
+        <span class="country-name">África do Sul</span>
+        <div class="country-line"></div>
+      </div>
+      <div class="wine-item">
+        <div class="wine-color-bar c-rose"></div>
+        <div class="wine-info">
+          <div class="wine-name">Nederburg</div>
+          <div class="wine-grapes">Cabernet Sauvignon, Merlot, Shiraz e Pinotage</div>
+          <div class="wine-region">Paarl</div>
+        </div>
+        <div class="wine-price">
+          <div class="wine-price-label">R$</div>
+          <div class="wine-price-value">159</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CHILE -->
+    <div class="subsection">
+      <div class="subsection-header">
+        <span class="country-flag">🇨🇱</span>
+        <span class="country-name">Chile</span>
+        <div class="country-line"></div>
+      </div>
+      <div class="wine-item">
+        <div class="wine-color-bar c-rose"></div>
+        <div class="wine-info">
+          <div class="wine-name">Bicicleta Pinot Noir Rosé</div>
+          <div class="wine-grapes">Pinot Noir</div>
+          <div class="wine-region">Vale del Bio Bio</div>
+        </div>
+        <div class="wine-price">
+          <div class="wine-price-label">R$</div>
+          <div class="wine-price-value">159</div>
+        </div>
+      </div>
+      <div class="wine-item">
+        <div class="wine-color-bar c-rose"></div>
+        <div class="wine-info">
+          <div class="wine-name">Santa Villa Único Syrah Rosé</div>
+          <div class="wine-grapes">Syrah</div>
+          <div class="wine-region">Vale Central</div>
+        </div>
+        <div class="wine-price">
+          <div class="wine-price-label">R$</div>
+          <div class="wine-price-value">129</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FRANÇA -->
+    <div class="subsection">
+      <div class="subsection-header">
+        <span class="country-flag">🇫🇷</span>
+        <span class="country-name">França</span>
+        <div class="country-line"></div>
+      </div>
+      <div class="wine-item">
+        <div class="wine-color-bar c-rose"></div>
+        <div class="wine-info">
+          <div class="wine-name">GEM Pays Grenache Rosé</div>
+          <div class="wine-grapes">Grenache</div>
+          <div class="wine-region">Languedoc-Roussillon</div>
+        </div>
+        <div class="wine-price">
+          <div class="wine-price-label">R$</div>
+          <div class="wine-price-value">289</div>
+        </div>
+      </div>
+      <div class="wine-item">
+        <div class="wine-color-bar c-rose"></div>
+        <div class="wine-info">
+          <div class="wine-name">Heritage Rosé</div>
+          <div class="wine-grapes">Cinsault, Carignan</div>
+          <div class="wine-region">Rhône</div>
+        </div>
+        <div class="wine-price">
+          <div class="wine-price-label">R$</div>
+          <div class="wine-price-value">179</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PORTUGAL -->
+    <div class="subsection">
+      <div class="subsection-header">
+        <span class="country-flag">🇵🇹</span>
+        <span class="country-name">Portugal</span>
+        <div class="country-line"></div>
+      </div>
+      <div class="wine-item">
+        <div class="wine-color-bar c-rose"></div>
+        <div class="wine-info">
+          <div class="wine-name">Vinhas do Marquês Rosé</div>
+          <div class="wine-grapes">Castelão, Tinta Roriz</div>
+          <div class="wine-region">Tejo</div>
+        </div>
+        <div class="wine-price">
+          <div class="wine-price-label">R$</div>
+          <div class="wine-price-value">179</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TINTOS -->
+  <div class="section" id="tinto">
+
+    <!-- ARGENTINA -->
+    <div class="subsection">
+      <div class="subsection-header">
+        <span class="country-flag">🇦🇷</span>
+        <span class="country-name">Argentina</span>
+        <div class="country-line"></div>
+      </div>
+      <div class="wine-item">
+        <div class="wine-color-bar c-tinto"></div>
+        <div class="wine-info">
+          <div class="wine-name">Animal Orgânico Malbec</div>
+          <div class="wine-grapes">Malbec</div>
+          <div class="wine-region">Mendoza</div>
+          <span class="wine-badge badge-organic">Orgânico</span>
+        </div>
+        <div class="wine-price">
+          <div class="wine-price-label">R$</div>
+          <div class="wine-price-value">299</div>
+        </div>
+      </div>
+      <div class="wine-item">
+        <div class="wine-color-bar c-tinto"></div>
+        <div class="wine-info">
+          <div class="wine-name">Angelica Zapata Malbec</div>
+          <div class="wine-grapes">Malbec</div>
+          <div class="wine-region">Mendoza</div>
+          <span class="wine-badge badge-special">Alta Expressão</span>
+        </div>
+        <div class="wine-price">
+          <div class="wine-price-label">R$</div>
+          <div class="wine-price-value">489</div>
+        </div>
+      </div>
+      <div class="wine-item">
+        <div class="wine-color-bar c-tinto"></div>
+        <div class="wine-info">
+          <div class="wine-name">Alma Negra</div>
+          <div class="wine-grapes">Blend tinto</div>
+          <div class="wine-region">Mendoza</div>
+        </div>
+        <div class="wine-price">
+          <div class="wine-price-label">R$</div>
+          <div class="wine-price-value">299</div>
+        </div>
+      </div>
+      <div class="wine-item">
+        <div class="wine-color-bar c-tinto"></div>
+        <div class="wine-info">
+          <div class="wine-name">DV Catena</div>
+          <div class="wine-grapes">Cabernet Sauvignon, Malbec</div>
+          <div class="wine-region">Mendoza</div>
+        </div>
+        <div class="wine-price">
+          <div class="wine-price-label">R$</div>
+          <div class="wine-price-value">329</div>
+        </div>
+      </div>
+      <div class="wine-item">
+        <div class="wine-color-bar c-tinto"></div>
+        <div class="wine-info">
+          <div class="wine-name">El Enemigo Malbec</div>
+          <div class="wine-grapes">Malbec</div>
+          <div class="wine-region">Mendoza</div>
+          <span class="wine-badge badge-special">Premium</span>
+        </div>
+        <div class="wine-price">
+          <div class="wine-price-label">R$</div>
+          <div class="wine-price-value">389</div>
+        </div>
+      </div>
+      <div class="wine-item">
+        <div class="wine-color-bar c-tinto"></div>
+        <div class="wine-info">
+          <div class="wine-name">Sexy Fish Cabernet Franc</div>
+          <div class="wine-grapes">Cabernet Franc</div>
+          <div class="wine-region">Mendoza</div>
+        </div>
+        <div class="wine-price">
+          <div class="wine-price-label">R$</div>
+          <div class="wine-price-value">129</div>
+        </div>
+      </div>
+      <div class="wine-item">
+        <div class="wine-color-bar c-tinto"></div>
+        <div class="wine-info">
+          <div class="wine-name">Pulenta Gran Merlot</div>
+          <div class="wine-grapes">Merlot</div>
+          <div class="wine-region">Mendoza</div>
+          <span class="wine-badge badge-special">Gran Reserva</span>
+        </div>
+        <div class="wine-price">
+          <div class="wine-price-label">R$</div>
+          <div class="wine-price-value">589</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CHILE -->
+    <div class="subsection">
+      <div class="subsection-header">
+        <span class="country-flag">🇨🇱</span>
+        <span class="country-name">Chile</span>
+        <div class="country-line"></div>
+      </div>
+      <div class="wine-item">
+        <div class="wine-color-bar c-tinto"></div>
+        <div class="wine-info">
+          <div class="wine-name">Errazuriz Collection Merlot</div>
+          <div class="wine-grapes">Merlot</div>
+          <div class="wine-region">Vale do Colchagua</div>
+        </div>
+        <div class="wine-price">
+          <div class="wine-price-label">R$</div>
+          <div class="wine-price-value">120</div>
+        </div>
+      </div>
+      <div class="wine-item">
+        <div class="wine-color-bar c-tinto"></div>
+        <div class="wine-info">
+          <div class="wine-name">Cota 1000 Reserva Carmenere</div>
+          <div class="wine-grapes">Carmenere</div>
+          <div class="wine-region">Vale Central</div>
+        </div>
+        <div class="wine-price">
+          <div class="wine-price-label">R$</div>
+          <div class="wine-price-value">159</div>
+        </div>
+      </div>
+      <div class="wine-item">
+        <div class="wine-color-bar c-tinto"></div>
+        <div class="wine-info">
+          <div class="wine-name">Destemido Jovem Carmenere</div>
+          <div class="wine-grapes">Carmenere</div>
+          <div class="wine-region">Vale de Maule</div>
+        </div>
+        <div class="wine-price">
+          <div class="wine-price-label">R$</div>
+          <div class="wine-price-value">139</div>
+        </div>
+      </div>
+      <div class="wine-item">
+        <div class="wine-color-bar c-tinto"></div>
+        <div class="wine-info">
+          <div class="wine-name">Santa Villa Único Carmenere</div>
+          <div class="wine-grapes">Carmenere</div>
+          <div class="wine-region">Vale Central</div>
+        </div>
+        <div class="wine-price">
+          <div class="wine-price-label">R$</div>
+          <div class="wine-price-value">99</div>
+        </div>
+      </div>
+      <div class="wine-item">
+        <div class="wine-color-bar c-tinto"></div>
+        <div class="wine-info">
+          <div class="wine-name">Cota 1000 Reserva Cabernet Sauvignon</div>
+          <div class="wine-grapes">Cabernet Sauvignon</div>
+          <div class="wine-region">Vale Central</div>
+        </div>
+        <div class="wine-price">
+          <div class="wine-price-label">R$</div>
+          <div class="wine-price-value">159</div>
+        </div>
+      </div>
+      <div class="wine-item">
+        <div class="wine-color-bar c-tinto"></div>
+        <div class="wine-info">
+          <div class="wine-name">Destemido Reserva Cabernet Sauvignon</div>
+          <div class="wine-grapes">Cabernet Sauvignon</div>
+          <div class="wine-region">Vale de Maule</div>
+        </div>
+        <div class="wine-price">
+          <div class="wine-price-label">R$</div>
+          <div class="wine-price-value">179</div>
+        </div>
+      </div>
+      <div class="wine-item">
+        <div class="wine-color-bar c-tinto"></div>
+        <div class="wine-info">
+          <div class="wine-name">Paskua Cabernet Sauvignon</div>
+          <div class="wine-grapes">Cabernet Sauvignon</div>
+          <div class="wine-region">Vale Central</div>
+        </div>
+        <div class="wine-price">
+          <div class="wine-price-label">R$</div>
+          <div class="wine-price-value">119</div>
+        </div>
+      </div>
+      <div class="wine-item">
+        <div class="wine-color-bar c-tinto"></div>
+        <div class="wine-info">
+          <div class="wine-name">Errazuriz Collection Cabernet Sauvignon</div>
+          <div class="wine-grapes">Cabernet Sauvignon</div>
+          <div class="wine-region">Vale Colchagua</div>
+        </div>
+        <div class="wine-price">
+          <div class="wine-price-label">R$</div>
+          <div class="wine-price-value">120</div>
+        </div>
+      </div>
+      <div class="wine-item">
+        <div class="wine-color-bar c-tinto"></div>
+        <div class="wine-info">
+          <div class="wine-name">Santa Villa Único Cabernet Sauvignon</div>
+          <div class="wine-grapes">Cabernet Sauvignon</div>
+          <div class="wine-region">Vale Central</div>
+        </div>
+        <div class="wine-price">
+          <div class="wine-price-label">R$</div>
+          <div class="wine-price-value">99</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FRANÇA -->
+    <div class="subsection">
+      <div class="subsection-header">
+        <span class="country-flag">🇫🇷</span>
+        <span class="country-name">França</span>
+        <div class="country-line"></div>
+      </div>
+      <div class="wine-item">
+        <div class="wine-color-bar c-tinto"></div>
+        <div class="wine-info">
+          <div class="wine-name">Cuvée Vaucher Père e Fils</div>
+          <div class="wine-grapes">Blend tinto</div>
+          <div class="wine-region">Borgonha</div>
+        </div>
+        <div class="wine-price">
+          <div class="wine-price-label">R$</div>
+          <div class="wine-price-value">189</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ITÁLIA -->
+    <div class="subsection">
+      <div class="subsection-header">
+        <span class="country-flag">🇮🇹</span>
+        <span class="country-name">Itália</span>
+        <div class="country-line"></div>
+      </div>
+      <div class="wine-item">
+        <div class="wine-color-bar c-tinto"></div>
+        <div class="wine-info">
+          <div class="wine-name">Brunello di Montalcino Altesino D.O.C.</div>
+          <div class="wine-grapes">Sangiovese</div>
+          <div class="wine-region">Toscana</div>
+          <span class="wine-badge badge-special">Ícone Italiano</span>
+        </div>
+        <div class="wine-price">
+          <div class="wine-price-label">R$</div>
+          <div class="wine-price-value">799</div>
+        </div>
+      </div>
+      <div class="wine-item">
+        <div class="wine-color-bar c-tinto"></div>
+        <div class="wine-info">
+          <div class="wine-name">Le Pianette</div>
+          <div class="wine-grapes">Sangiovese (70%), Colorino del Valdarno (30%)</div>
+          <div class="wine-region">Toscana</div>
+        </div>
+        <div class="wine-price">
+          <div class="wine-price-label">R$</div>
+          <div class="wine-price-value">319</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PORTUGAL -->
+    <div class="subsection">
+      <div class="subsection-header">
+        <span class="country-flag">🇵🇹</span>
+        <span class="country-name">Portugal</span>
+        <div class="country-line"></div>
+      </div>
+      <div class="wine-item">
+        <div class="wine-color-bar c-tinto"></div>
+        <div class="wine-info">
+          <div class="wine-name">Vallado</div>
+          <div class="wine-grapes">Touriga Franca, Touriga Nacional e Tinta Roriz</div>
+          <div class="wine-region">Douro</div>
+          <span class="wine-badge badge-special">Grande Reserva</span>
+        </div>
+        <div class="wine-price">
+          <div class="wine-price-label">R$</div>
+          <div class="wine-price-value">799</div>
+        </div>
+      </div>
+      <div class="wine-item">
+        <div class="wine-color-bar c-tinto"></div>
+        <div class="wine-info">
+          <div class="wine-name">Vinhas do Marquês</div>
+          <div class="wine-grapes">Canaiolo, Ciliegiolo e Sangiovese</div>
+          <div class="wine-region">Tejo</div>
+        </div>
+        <div class="wine-price">
+          <div class="wine-price-label">R$</div>
+          <div class="wine-price-value">129</div>
+        </div>
+      </div>
+      <div class="wine-item">
+        <div class="wine-color-bar c-tinto"></div>
+        <div class="wine-info">
+          <div class="wine-name">Reguengos</div>
+          <div class="wine-grapes">Trincadeira, Aragonez e Castelão</div>
+          <div class="wine-region">Alentejo</div>
+        </div>
+        <div class="wine-price">
+          <div class="wine-price-label">R$</div>
+          <div class="wine-price-value">129</div>
+        </div>
+      </div>
+      <div class="wine-item">
+        <div class="wine-color-bar c-tinto"></div>
+        <div class="wine-info">
+          <div class="wine-name">Invasor Colheita</div>
+          <div class="wine-grapes">Touriga Nacional, Touriga Franca e Tinta Barroca</div>
+          <div class="wine-region">Douro</div>
+        </div>
+        <div class="wine-price">
+          <div class="wine-price-label">R$</div>
+          <div class="wine-price-value">189</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ESPANHA -->
+    <div class="subsection">
+      <div class="subsection-header">
+        <span class="country-flag">🇪🇸</span>
+        <span class="country-name">Espanha</span>
+        <div class="country-line"></div>
+      </div>
+      <div class="wine-item">
+        <div class="wine-color-bar c-tinto"></div>
+        <div class="wine-info">
+          <div class="wine-name">El Castro de Valtuille</div>
+          <div class="wine-grapes">Mencía</div>
+          <div class="wine-region">Bierzo</div>
+        </div>
+        <div class="wine-price">
+          <div class="wine-price-label">R$</div>
+          <div class="wine-price-value">289</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ESPECIAIS (375ml, 187ml, Sobremesa) -->
+  <div class="section" id="outros">
+
+    <div class="size-label">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M8 22h8M7 10h10M12 15v7M12 15a5 5 0 0 0 5-5c0-2-.5-4-2-8H9c-1.5 4-2 6-2 8a5 5 0 0 0 5 5z"/>
+      </svg>
+      Meia-garrafa · 375 ml
+    </div>
+
+    <div class="wine-item">
+      <div class="wine-color-bar c-tinto"></div>
+      <div class="wine-info">
+        <div class="wine-name">Alfredo Roca Malbec</div>
+        <div class="wine-grapes">Malbec</div>
+        <div class="wine-region">Mendoza · 375ml</div>
+      </div>
+      <div class="wine-price">
+        <div class="wine-price-label">R$</div>
+        <div class="wine-price-value">99</div>
+      </div>
+    </div>
+
+    <div class="wine-item">
+      <div class="wine-color-bar c-rose"></div>
+      <div class="wine-info">
+        <div class="wine-name">Bicicleta Reserva Pinot Noir</div>
+        <div class="wine-grapes">Pinot Noir Rosé</div>
+        <div class="wine-region">Vale Central · 375ml</div>
+      </div>
+      <div class="wine-price">
+        <div class="wine-price-label">R$</div>
+        <div class="wine-price-value">99</div>
+      </div>
+    </div>
+
+    <div class="size-label">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M8 22h8M7 10h10M12 15v7M12 15a5 5 0 0 0 5-5c0-2-.5-4-2-8H9c-1.5 4-2 6-2 8a5 5 0 0 0 5 5z"/>
+      </svg>
+      Taça · 187 ml
+    </div>
+
+    <div class="wine-item">
+      <div class="wine-color-bar c-branco"></div>
+      <div class="wine-info">
+        <div class="wine-name">Vistana Sauvignon Blanc</div>
+        <div class="wine-grapes">Sauvignon Blanc</div>
+        <div class="wine-region">Vale Central · 187ml</div>
+      </div>
+      <div class="wine-price">
+        <div class="wine-price-label">R$</div>
+        <div class="wine-price-value">49</div>
+      </div>
+    </div>
+
+    <div class="wine-item">
+      <div class="wine-color-bar c-tinto"></div>
+      <div class="wine-info">
+        <div class="wine-name">Vistana Cabernet Sauvignon</div>
+        <div class="wine-grapes">Cabernet Sauvignon</div>
+        <div class="wine-region">Vale Central · 187ml</div>
+      </div>
+      <div class="wine-price">
+        <div class="wine-price-label">R$</div>
+        <div class="wine-price-value">49</div>
+      </div>
+    </div>
+
+    <div class="wine-item">
+      <div class="wine-color-bar c-rose"></div>
+      <div class="wine-info">
+        <div class="wine-name">Longitud Syrah Rosé</div>
+        <div class="wine-grapes">Syrah</div>
+        <div class="wine-region">Vale Central · 187ml</div>
+      </div>
+      <div class="wine-price">
+        <div class="wine-price-label">R$</div>
+        <div class="wine-price-value">49</div>
+      </div>
+    </div>
+
+    <div class="size-label">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/>
+      </svg>
+      Vinhos de Sobremesa
+    </div>
+
+    <div class="wine-item">
+      <div class="wine-color-bar c-sobremesa"></div>
+      <div class="wine-info">
+        <div class="wine-name">Achaval Ferrer Malbec Dolce</div>
+        <div class="wine-grapes">Malbec</div>
+        <div class="wine-region">Mendoza · Sobremesa</div>
+        <span class="wine-badge badge-special">Doce</span>
+      </div>
+      <div class="wine-price">
+        <div class="wine-price-label">R$</div>
+        <div class="wine-price-value">199</div>
+      </div>
+    </div>
+
+    <div class="wine-item">
+      <div class="wine-color-bar c-sobremesa"></div>
+      <div class="wine-info">
+        <div class="wine-name">Pequeñas Producciones Late Harvest</div>
+        <div class="wine-grapes">Sauvignon Blanc</div>
+        <div class="wine-region">Mendoza · 500ml · Late Harvest</div>
+        <span class="wine-badge badge-special">Colheita Tardia</span>
+      </div>
+      <div class="wine-price">
+        <div class="wine-price-label">R$</div>
+        <div class="wine-price-value">259</div>
+      </div>
+    </div>
+
+  </div><!-- /outros -->
+
+</div><!-- /content -->
+
+<!-- PAGE FOOTER -->
+<div class="page-footer">
+  <div class="page-footer-name">Restaurante Benvindo · Carta de Vinhos</div>
+  <div class="page-footer-sub">Preços sujeitos a alteração sem aviso prévio</div>
+</div>
+
+<script>
+  function showSection(id, btn) {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    btn.classList.add('active');
+    window.scrollTo({ top: document.querySelector('.filter-wrap').offsetTop - 1, behavior: 'smooth' });
+  }
+</script>
+</body>
+</html>
