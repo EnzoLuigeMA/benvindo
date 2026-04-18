@@ -1,0 +1,1108 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cardápio · Restaurante Benvindo</title>
+<meta name="description" content="Cardápio completo do Restaurante Benvindo — entradas, massas, risotos, peixes, carnes, sanduíches, sobremesas e drinks.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Cinzel:wght@400;500&family=Lato:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0a0a0a;
+    --black-card: #141414;
+    --black-card2: #191919;
+    --gold: #c9a84c;
+    --gold-light: #e2c27d;
+    --white: #f5f0e8;
+    --white-dim: rgba(245,240,232,0.6);
+    --white-subtle: rgba(245,240,232,0.08);
+    --border: rgba(201,168,76,0.18);
+    --border-hover: rgba(201,168,76,0.45);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
+    min-height: 100vh;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.5;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 52px 24px 36px;
+    border-bottom: 1px solid var(--border);
+    animation: fadeDown 0.8s ease both;
+  }
+
+  .back-btn {
+    position: absolute;
+    left: 20px;
+    top: 52px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    font-family: 'Cinzel', serif;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    text-decoration: none;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+  }
+  .back-btn:hover { opacity: 1; }
+
+  .header-eyebrow {
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--gold);
+    opacity: 0.65;
+    margin-bottom: 10px;
+  }
+
+  .header-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 36px;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--white);
+    line-height: 1.1;
+    margin-bottom: 10px;
+  }
+
+  .header-sub {
+    font-size: 12px;
+    font-weight: 300;
+    color: var(--white-dim);
+    letter-spacing: 0.08em;
+  }
+
+  .header-divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 20px auto 0;
+    max-width: 220px;
+  }
+  .hdl { flex:1; height:1px; background: linear-gradient(90deg,transparent,var(--gold),transparent); opacity:.3; }
+  .hdd { width:5px; height:5px; background:var(--gold); transform:rotate(45deg); opacity:.5; }
+
+  /* ── DUO BADGE ── */
+  .duo-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(201,168,76,0.10);
+    border: 1px solid rgba(201,168,76,0.3);
+    border-radius: 20px;
+    padding: 5px 14px;
+    margin-top: 16px;
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold-light);
+  }
+
+  /* ── FILTER TABS ── */
+  .filter-wrap {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: rgba(10,10,10,0.96);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 16px;
+    animation: fadeDown 0.8s 0.1s ease both;
+  }
+
+  .filter-tabs {
+    display: flex;
+    overflow-x: auto;
+    scrollbar-width: none;
+    max-width: 640px;
+    margin: 0 auto;
+  }
+  .filter-tabs::-webkit-scrollbar { display: none; }
+
+  .tab {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 14px 14px;
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--white-dim);
+    border: none;
+    background: none;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: color 0.25s;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+  }
+  .tab.active { color: var(--gold-light); border-bottom-color: var(--gold); }
+  .tab:hover:not(.active) { color: var(--white); }
+
+  /* ── CONTENT ── */
+  .content {
+    position: relative;
+    z-index: 1;
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 0 16px 64px;
+  }
+
+  .section { display: none; animation: fadeUp 0.4s ease both; }
+  .section.active { display: block; }
+
+  /* ── CATEGORY HEADER ── */
+  .cat-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 24px 4px 14px;
+  }
+  .cat-icon { font-size: 16px; line-height: 1; }
+  .cat-name {
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--gold);
+    opacity: 0.75;
+  }
+  .cat-line { flex:1; height:1px; background: linear-gradient(90deg, var(--border), transparent); }
+
+  /* ── MENU ITEM ── */
+  .menu-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 13px 16px;
+    background: var(--black-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    margin-bottom: 8px;
+    transition: all 0.25s ease;
+  }
+  .menu-item:hover {
+    border-color: var(--border-hover);
+    background: var(--black-card2);
+    transform: translateX(3px);
+  }
+
+  .menu-bar {
+    width: 3px;
+    border-radius: 99px;
+    flex-shrink: 0;
+    align-self: stretch;
+    min-height: 36px;
+  }
+
+  .bar-entrada  { background: linear-gradient(180deg,#d4a847,#9b7520); }
+  .bar-massa    { background: linear-gradient(180deg,#c8a06a,#8b5e2c); }
+  .bar-peixe    { background: linear-gradient(180deg,#6ab4c8,#2c7a8b); }
+  .bar-carne    { background: linear-gradient(180deg,#c86a6a,#8b2c2c); }
+  .bar-ave      { background: linear-gradient(180deg,#b4a06a,#6b5a2c); }
+  .bar-sobremesa{ background: linear-gradient(180deg,#c88ab0,#8b3a6a); }
+  .bar-petisco  { background: linear-gradient(180deg,#a0c86a,#5a8b2c); }
+  .bar-sanduba  { background: linear-gradient(180deg,#c8a06a,#7a5020); }
+  .bar-grelhado { background: linear-gradient(180deg,#c87060,#8b2a1a); }
+  .bar-acomp    { background: linear-gradient(180deg,#80b870,#3a7028); }
+  .bar-drink    { background: linear-gradient(180deg,#7090d0,#304090); }
+
+  .menu-info { flex: 1; min-width: 0; }
+
+  .menu-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--white);
+    line-height: 1.2;
+    margin-bottom: 3px;
+  }
+
+  .menu-desc {
+    font-size: 11px;
+    font-weight: 300;
+    color: var(--white-dim);
+    letter-spacing: 0.02em;
+    line-height: 1.5;
+  }
+
+  .menu-badges { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 5px; }
+
+  .badge {
+    display: inline-block;
+    font-size: 9px;
+    font-family: 'Cinzel', serif;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 2px 8px;
+    border-radius: 20px;
+  }
+  .badge-duo     { background: rgba(201,168,76,0.15); color: var(--gold); border: 1px solid rgba(201,168,76,0.35); }
+  .badge-popular { background: rgba(200,100,100,0.15); color: #e2a0a0; border: 1px solid rgba(200,100,100,0.3); }
+  .badge-veggie  { background: rgba(80,180,80,0.12); color: #90d490; border: 1px solid rgba(80,180,80,0.3); }
+  .badge-sem-alcool { background: rgba(120,180,220,0.12); color: #90c4de; border: 1px solid rgba(120,180,220,0.3); }
+
+  .menu-price {
+    text-align: right;
+    flex-shrink: 0;
+  }
+  .menu-price-label {
+    font-size: 10px;
+    color: rgba(201,168,76,0.45);
+    letter-spacing: 0.05em;
+    margin-bottom: 2px;
+    font-family: 'Cinzel', serif;
+  }
+  .menu-price-value {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 19px;
+    font-weight: 500;
+    color: var(--gold-light);
+    line-height: 1;
+    white-space: nowrap;
+  }
+
+  /* incl acompanhamentos note */
+  .incl-note {
+    font-size: 10px;
+    color: rgba(201,168,76,0.5);
+    font-style: italic;
+    margin-top: 3px;
+  }
+
+  /* service note */
+  .service-note {
+    width: 100%;
+    background: rgba(201,168,76,0.07);
+    border: 1px solid rgba(201,168,76,0.15);
+    border-radius: 10px;
+    padding: 12px 16px;
+    margin-top: 20px;
+    font-size: 11px;
+    color: var(--white-dim);
+    line-height: 1.6;
+    letter-spacing: 0.03em;
+  }
+  .service-note strong { color: var(--gold-light); font-weight: 400; }
+
+  /* footer */
+  .page-footer {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 32px 24px;
+    border-top: 1px solid var(--border);
+  }
+  .page-footer-name {
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: rgba(201,168,76,0.4);
+    margin-bottom: 6px;
+  }
+  .page-footer-sub {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 12px;
+    font-style: italic;
+    color: rgba(245,240,232,0.25);
+  }
+
+  @keyframes fadeDown { from{opacity:0;transform:translateY(-14px)} to{opacity:1;transform:translateY(0)} }
+  @keyframes fadeUp   { from{opacity:0;transform:translateY(12px)}  to{opacity:1;transform:translateY(0)} }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <a href="benvindo-bio.html" class="back-btn">
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+    Voltar
+  </a>
+  <div class="header-eyebrow">Restaurante Benvindo</div>
+  <div class="header-title">Cardápio</div>
+  <div class="header-sub">Desde 2009 · Cozinha contemporânea</div>
+  <div class="header-divider">
+    <div class="hdl"></div><div class="hdd"></div><div class="hdl"></div>
+  </div>
+  <div class="duo-badge">
+    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+    Pratos ✦ compatíveis com Duo Gourmet
+  </div>
+</div>
+
+<!-- TABS -->
+<div class="filter-wrap">
+  <div class="filter-tabs">
+    <button class="tab active" onclick="show('entradas',this)">Entradas</button>
+    <button class="tab" onclick="show('principais',this)">Principais</button>
+    <button class="tab" onclick="show('grelhados',this)">Grelhados</button>
+    <button class="tab" onclick="show('petiscos',this)">Petiscos</button>
+    <button class="tab" onclick="show('sobremesas',this)">Sobremesas</button>
+    <button class="tab" onclick="show('bebidas',this)">Bebidas</button>
+  </div>
+</div>
+
+<div class="content">
+
+  <!-- ══ ENTRADAS ══ -->
+  <div class="section active" id="entradas">
+
+    <div class="cat-header"><span class="cat-icon">🥗</span><span class="cat-name">Entradas</span><div class="cat-line"></div></div>
+
+    <div class="menu-item">
+      <div class="menu-bar bar-entrada"></div>
+      <div class="menu-info">
+        <div class="menu-name">Pastel de Bacalhau</div>
+      </div>
+      <div class="menu-price"><div class="menu-price-label">R$</div><div class="menu-price-value">51</div></div>
+    </div>
+
+    <div class="menu-item">
+      <div class="menu-bar bar-entrada"></div>
+      <div class="menu-info">
+        <div class="menu-name">Brie Crocante</div>
+        <div class="menu-desc">Queijo Brie empanado na farinha panko, amêndoas e melaço de cana</div>
+      </div>
+      <div class="menu-price"><div class="menu-price-label">R$</div><div class="menu-price-value">69</div></div>
+    </div>
+
+    <div class="menu-item">
+      <div class="menu-bar bar-entrada"></div>
+      <div class="menu-info">
+        <div class="menu-name">Bruschetta Clássica de Tomate</div>
+        <div class="menu-badges"><span class="badge badge-veggie">Vegetariano</span></div>
+      </div>
+      <div class="menu-price"><div class="menu-price-label">R$</div><div class="menu-price-value">39</div></div>
+    </div>
+
+    <div class="menu-item">
+      <div class="menu-bar bar-entrada"></div>
+      <div class="menu-info">
+        <div class="menu-name">Burrata com Presunto de Parma</div>
+        <div class="menu-desc">Azeite aromatizado e cesta de pães</div>
+        <div class="menu-badges"><span class="badge badge-popular">Popular</span></div>
+      </div>
+      <div class="menu-price"><div class="menu-price-label">R$</div><div class="menu-price-value">69</div></div>
+    </div>
+
+    <div class="menu-item">
+      <div class="menu-bar bar-entrada"></div>
+      <div class="menu-info">
+        <div class="menu-name">Carpaccio Trufado</div>
+      </div>
+      <div class="menu-price"><div class="menu-price-label">R$</div><div class="menu-price-value">51</div></div>
+    </div>
+
+    <div class="menu-item">
+      <div class="menu-bar bar-entrada"></div>
+      <div class="menu-info">
+        <div class="menu-name">Steak Tartare com Fritas</div>
+      </div>
+      <div class="menu-price"><div class="menu-price-label">R$</div><div class="menu-price-value">69</div></div>
+    </div>
+
+    <div class="menu-item">
+      <div class="menu-bar bar-entrada"></div>
+      <div class="menu-info">
+        <div class="menu-name">Manzo Tonnato</div>
+        <div class="menu-desc">Rosbife fatiado fino com molho à base de atum, anchova e alcaparra</div>
+      </div>
+      <div class="menu-price"><div class="menu-price-label">R$</div><div class="menu-price-value">62</div></div>
+    </div>
+
+    <div class="menu-item">
+      <div class="menu-bar bar-entrada"></div>
+      <div class="menu-info">
+        <div class="menu-name">Prato Misto</div>
+        <div class="menu-desc">Salada de ovos, salada de pepino, babaganush, alcaparras e cream cheese</div>
+        <div class="menu-badges"><span class="badge badge-veggie">Vegetariano</span></div>
+      </div>
+      <div class="menu-price"><div class="menu-price-label">R$</div><div class="menu-price-value">39</div></div>
+    </div>
+
+    <div class="menu-item">
+      <div class="menu-bar bar-entrada"></div>
+      <div class="menu-info">
+        <div class="menu-name">Alcachofras à Judeia</div>
+        <div class="menu-desc">Alcachofras, aioli de anchovas, pecorino, limão e hortelã</div>
+      </div>
+      <div class="menu-price"><div class="menu-price-label">R$</div><div class="menu-price-value">51</div></div>
+    </div>
+
+    <div class="menu-item">
+      <div class="menu-bar bar-entrada"></div>
+      <div class="menu-info">
+        <div class="menu-name">Kibe Cru de Atum</div>
+        <div class="menu-desc">Coalhada, cebolas tostadas, hortelã e sumac</div>
+      </div>
+      <div class="menu-price"><div class="menu-price-label">R$</div><div class="menu-price-value">69</div></div>
+    </div>
+
+    <div class="menu-item">
+      <div class="menu-bar bar-entrada"></div>
+      <div class="menu-info">
+        <div class="menu-name">Latkes</div>
+        <div class="menu-desc">"Panquecas" de batata, purê de maçã e creme fresco</div>
+        <div class="menu-badges"><span class="badge badge-veggie">Vegetariano</span></div>
+      </div>
+      <div class="menu-price"><div class="menu-price-label">R$</div><div class="menu-price-value">69</div></div>
+    </div>
+
+    <div class="menu-item">
+      <div class="menu-bar bar-entrada"></div>
+      <div class="menu-info">
+        <div class="menu-name">Melone</div>
+        <div class="menu-desc">Melão brûlée aromatizado com especiarias, presunto cru e queijo de cabra</div>
+      </div>
+      <div class="menu-price"><div class="menu-price-label">R$</div><div class="menu-price-value">69</div></div>
+    </div>
+
+    <div class="menu-item">
+      <div class="menu-bar bar-entrada"></div>
+      <div class="menu-info">
+        <div class="menu-name">Caesar Salad</div>
+      </div>
+      <div class="menu-price"><div class="menu-price-label">R$</div><div class="menu-price-value">29</div></div>
+    </div>
+
+    <div class="menu-item">
+      <div class="menu-bar bar-entrada"></div>
+      <div class="menu-info">
+        <div class="menu-name">Matambre</div>
+        <div class="menu-desc">Capa de costela desfiada</div>
+      </div>
+      <div class="menu-price"><div class="menu-price-label">R$</div><div class="menu-price-value">89</div></div>
+    </div>
+
+    <div class="service-note">
+      <strong>✦ Duo Gourmet</strong> · Os pratos marcados são válidos para utilização do voucher.<br>
+      Serviço de 13%, opcional · Tempo aproximado de preparo: 30 minutos
+    </div>
+  </div>
+
+  <!-- ══ PRINCIPAIS ══ -->
+  <div class="section" id="principais">
+
+    <!-- Massas e Risotos -->
+    <div class="cat-header"><span class="cat-icon">🍝</span><span class="cat-name">Massas e Risotos</span><div class="cat-line"></div></div>
+
+    <div class="menu-item">
+      <div class="menu-bar bar-massa"></div>
+      <div class="menu-info">
+        <div class="menu-name">Rigatoni Caprese</div>
+        <div class="menu-badges"><span class="badge badge-duo">✦ Duo Gourmet</span><span class="badge badge-veggie">Vegetariano</span></div>
+      </div>
+      <div class="menu-price"><div class="menu-price-label">R$</div><div class="menu-price-value">65</div></div>
+    </div>
+
+    <div class="menu-item">
+      <div class="menu-bar bar-massa"></div>
+      <div class="menu-info">
+        <div class="menu-name">Rigatoni alla Bolognese</div>
+        <div class="menu-badges"><span class="badge badge-duo">✦ Duo Gourmet</span></div>
+      </div>
+      <div class="menu-price"><div class="menu-price-label">R$</div><div class="menu-price-value">69</div></div>
+    </div>
+
+    <div class="menu-item">
+      <div class="menu-bar bar-massa"></div>
+      <div class="menu-info">
+        <div class="menu-name">Spaghetti à Carbonara</div>
+        <div class="menu-badges"><span class="badge badge-duo">✦ Duo Gourmet</span><span class="badge badge-popular">Popular</span></div>
+      </div>
+      <div class="menu-price"><div class="menu-price-label">R$</div><div class="menu-price-value">69</div></div>
+    </div>
+
+    <div class="menu-item">
+      <div class="menu-bar bar-massa"></div>
+      <div class="menu-info">
+        <div class="menu-name">Orecchiete com Ragú de Linguiça</div>
+        <div class="menu-badges"><span class="badge badge-duo">✦ Duo Gourmet</span></div>
+      </div>
+      <div class="menu-price"><div class="menu-price-label">R$</div><div class="menu-price-value">69</div></div>
+    </div>
+
+    <div class="menu-item">
+      <div class="menu-bar bar-massa"></div>
+      <div class="menu-info">
+        <div class="menu-name">Melanzane al Forno</div>
+        <div class="menu-badges"><span class="badge badge-duo">✦ Duo Gourmet</span><span class="badge badge-veggie">Vegetariano</span></div>
+      </div>
+      <div class="menu-price"><div class="menu-price-label">R$</div><div class="menu-price-value">59</div></div>
+    </div>
+
+    <div class="menu-item">
+      <div class="menu-bar bar-massa"></div>
+      <div class="menu-info">
+        <div class="menu-name">Risoto de Filé em Cubos e Cogumelos</div>
+        <div class="menu-badges"><span class="badge badge-duo">✦ Duo Gourmet</span></div>
+      </div>
+      <div class="menu-price"><div class="menu-price-label">R$</div><div class="menu-price-value">79</div></div>
+    </div>
+
+    <div class="menu-item">
+      <div class="menu-bar bar-massa"></div>
+      <div class="menu-info">
+        <div class="menu-name">Risoto de Aspargos e Cogumelos</div>
+        <div class="menu-badges"><span class="badge badge-duo">✦ Duo Gourmet</span><span class="badge badge-veggie">Vegetariano</span></div>
+      </div>
+      <div class="menu-price"><div class="menu-price-label">R$</div><div class="menu-price-value">75</div></div>
+    </div>
+
+    <div class="menu-item">
+      <div class="menu-bar bar-massa"></div>
+      <div class="menu-info">
+        <div class="menu-name">Risoto de Bacalhau</div>
+        <div class="menu-badges"><span class="badge badge-duo">✦ Duo Gourmet</span></div>
+      </div>
+      <div class="menu-price"><div class="menu-price-label">R$</div><div class="menu-price-value">79</div></div>
+    </div>
+
+    <div class="menu-item">
+      <div class="menu-bar bar-massa"></div>
+      <div class="menu-info">
+        <div class="menu-name">Risoto de Camarão e Queijo Brie</div>
+        <div class="menu-badges"><span class="badge badge-duo">✦ Duo Gourmet</span><span class="badge badge-popular">Popular</span></div>
+      </div>
+      <div class="menu-price"><div class="menu-price-label">R$</div><div class="menu-price-value">99</div></div>
+    </div>
+
+    <div class="menu-item">
+      <div class="menu-bar bar-massa"></div>
+      <div class="menu-info">
+        <div class="menu-name">Risoto de Costela</div>
+        <div class="menu-badges"><span class="badge badge-duo">✦ Duo Gourmet</span></div>
+      </div>
+      <div class="menu-price"><div class="menu-price-label">R$</div><div class="menu-price-value">79</div></div>
+    </div>
+
+    <!-- Peixes e Frutos do Mar -->
+    <div class="cat-header" style="margin-top:8px"><span class="cat-icon">🐟</span><span class="cat-name">Peixes e Frutos do Mar</span><div class="cat-line"></div></div>
+
+    <div class="menu-item">
+      <div class="menu-bar bar-peixe"></div>
+      <div class="menu-info">
+        <div class="menu-name">Atum em Crosta de Gergelim e Arroz Negro</div>
+      </div>
+      <div class="menu-price"><div class="menu-price-label">R$</div><div class="menu-price-value">119</div></div>
+    </div>
+
+    <div class="menu-item">
+      <div class="menu-bar bar-peixe"></div>
+      <div class="menu-info">
+        <div class="menu-name">Bacalhau Mediterrâneo e Gratin de Batata</div>
+      </div>
+      <div class="menu-price"><div class="menu-price-label">R$</div><div class="menu-price-value">179</div></div>
+    </div>
+
+    <div class="menu-item">
+      <div class="menu-bar bar-peixe"></div>
+      <div class="menu-info">
+        <div class="menu-name">Badejo com Aspargos e Mini Milho</div>
+      </div>
+      <div class="menu-price"><div class="menu-price-label">R$</div><div class="menu-price-value">109</div></div>
+    </div>
+
+    <div class="menu-item">
+      <div class="menu-bar bar-peixe"></div>
+      <div class="menu-info">
+        <div class="menu-name">Camarão à Provençal e Risoto de Limão Siciliano</div>
+      </div>
+      <div class="menu-price"><div class="menu-price-label">R$</div><div class="menu-price-value">179</div></div>
+    </div>
+
+    <div class="menu-item">
+      <div class="menu-bar bar-peixe"></div>
+      <div class="menu-info">
+        <div class="menu-name">Polvo à Provençal com Risoto de Aspargos</div>
+        <div class="menu-badges"><span class="badge badge-popular">Popular</span></div>
+      </div>
+      <div class="menu-price"><div class="menu-price-label">R$</div><div class="menu-price-value">189</div></div>
+    </div>
+
+    <div class="menu-item">
+      <div class="menu-bar bar-peixe"></div>
+      <div class="menu-info">
+        <div class="menu-name">Saint Peter à Provençal e Legumes</div>
+        <div class="menu-badges"><span class="badge badge-duo">✦ Duo Gourmet</span></div>
+      </div>
+      <div class="menu-price"><div class="menu-price-label">R$</div><div class="menu-price-value">89</div></div>
+    </div>
+
+    <div class="menu-item">
+      <div class="menu-bar bar-peixe"></div>
+      <div class="menu-info">
+        <div class="menu-name">Salmão Benvindo</div>
+        <div class="menu-badges"><span class="badge badge-duo">✦ Duo Gourmet</span><span class="badge badge-popular">Popular</span></div>
+      </div>
+      <div class="menu-price"><div class="menu-price-label">R$</div><div class="menu-price-value">99</div></div>
+    </div>
+
+    <!-- Carnes -->
+    <div class="cat-header" style="margin-top:8px"><span class="cat-icon">🥩</span><span class="cat-name">Carnes</span><div class="cat-line"></div></div>
+
+    <div class="menu-item">
+      <div class="menu-bar bar-carne"></div>
+      <div class="menu-info">
+        <div class="menu-name">Paillard de Filé Mignon e Fettuccine</div>
+        <div class="menu-badges"><span class="badge badge-duo">✦ Duo Gourmet</span></div>
+      </div>
+      <div class="menu-price"><div class="menu-price-label">R$</div><div class="menu-price-value">99</div></div>
+    </div>
+
+    <div class="menu-item">
+      <div class="menu-bar bar-carne"></div>
+      <div class="menu-info">
+        <div class="menu-name">Escalope de Filé com Risoto de Funghi</div>
+        <div class="menu-badges"><span class="badge badge-duo">✦ Duo Gourmet</span></div>
+      </div>
+      <div class="menu-price"><div class="menu-price-label">R$</div><div class="menu-price-value">89</div></div>
+    </div>
+
+    <div class="menu-item">
+      <div class="menu-bar bar-carne"></div>
+      <div class="menu-info">
+        <div class="menu-name">Steak au Poivre, Espinafre e Fritas</div>
+      </div>
+      <div class="menu-price"><div class="menu-price-label">R$</div><div class="menu-price-value">109</div></div>
+    </div>
+
+    <div class="menu-item">
+      <div class="menu-bar bar-carne"></div>
+      <div class="menu-info">
+        <div class="menu-name">Filé Benvindo</div>
+        <div class="menu-badges"><span class="badge badge-popular">Popular</span></div>
+      </div>
+      <div class="menu-price"><div class="menu-price-label">R$</div><div class="menu-price-value">119</div></div>
+    </div>
+
+    <div class="menu-item">
+      <div class="menu-bar bar-carne"></div>
+      <div class="menu-info">
+        <div class="menu-name">Tornedor de Filé com Risoto Quatro Queijos</div>
+      </div>
+      <div class="menu-price"><div class="menu-price-label">R$</div><div class="menu-price-value">119</div></div>
+    </div>
+
+    <div class="menu-item">
+      <div class="menu-bar bar-carne"></div>
+      <div class="menu-info">
+        <div class="menu-name">Filé ao Molho de Frutas Vermelhas</div>
+        <div class="menu-desc">Cabelinho de anjo e cogumelos</div>
+      </div>
+      <div class="menu-price"><div class="menu-price-label">R$</div><div class="menu-price-value">105</div></div>
+    </div>
+
+    <div class="menu-item">
+      <div class="menu-bar bar-carne"></div>
+      <div class="menu-info">
+        <div class="menu-name">Filé Mignon à Parmegiana</div>
+      </div>
+      <div class="menu-price"><div class="menu-price-label">R$</div><div class="menu-price-value">104</div></div>
+    </div>
+
+    <!-- Aves -->
+    <div class="cat-header" style="margin-top:8px"><span class="cat-icon">🦆</span><span class="cat-name">Aves</span><div class="cat-line"></div></div>
+
+    <div class="menu-item">
+      <div class="menu-bar bar-ave"></div>
+      <div class="menu-info">
+        <div class="menu-name">Magret ao Cítrico e Risoto de Mel</div>
+        <div class="menu-desc">Peito de pato com risoto de mel</div>
+        <div class="menu-badges"><span class="badge badge-popular">Carro-chefe</span></div>
+      </div>
+      <div class="menu-price"><div class="menu-price-label">R$</div><div class="menu-price-value">139</div></div>
+    </div>
+
+    <div class="service-note">
+      <strong>✦ Duo Gourmet</strong> · Pratos marcados são válidos para o voucher.<br>
+      Serviço de 13%, opcional · Tempo aproximado de preparo: 30 minutos
+    </div>
+  </div>
+
+  <!-- ══ GRELHADOS ══ -->
+  <div class="section" id="grelhados">
+
+    <div class="cat-header"><span class="cat-icon">🔥</span><span class="cat-name">Grelhados</span><div class="cat-line"></div></div>
+    <p style="font-size:11px;color:var(--white-dim);padding:0 4px 16px;letter-spacing:0.04em;">* Incluso dois acompanhamentos</p>
+
+    <div class="menu-item">
+      <div class="menu-bar bar-grelhado"></div>
+      <div class="menu-info">
+        <div class="menu-name">Bife de Chorizo</div>
+        <div class="incl-note">+ 2 acompanhamentos</div>
+      </div>
+      <div class="menu-price"><div class="menu-price-label">R$</div><div class="menu-price-value">98</div></div>
+    </div>
+
+    <div class="menu-item">
+      <div class="menu-bar bar-grelhado"></div>
+      <div class="menu-info">
+        <div class="menu-name">Carré de Cordeiro</div>
+        <div class="incl-note">+ 2 acompanhamentos</div>
+        <div class="menu-badges"><span class="badge badge-popular">Premium</span></div>
+      </div>
+      <div class="menu-price"><div class="menu-price-label">R$</div><div class="menu-price-value">151</div></div>
+    </div>
+
+    <div class="menu-item">
+      <div class="menu-bar bar-grelhado"></div>
+      <div class="menu-info">
+        <div class="menu-name">Tornedor de Filé Mignon</div>
+        <div class="incl-note">+ 2 acompanhamentos</div>
+      </div>
+      <div class="menu-price"><div class="menu-price-label">R$</div><div class="menu-price-value">99</div></div>
+    </div>
+
+    <div class="menu-item">
+      <div class="menu-bar bar-peixe"></div>
+      <div class="menu-info">
+        <div class="menu-name">Salmão</div>
+        <div class="incl-note">+ 2 acompanhamentos</div>
+      </div>
+      <div class="menu-price"><div class="menu-price-label">R$</div><div class="menu-price-value">99</div></div>
+    </div>
+
+    <div class="menu-item">
+      <div class="menu-bar bar-peixe"></div>
+      <div class="menu-info">
+        <div class="menu-name">Atum</div>
+        <div class="incl-note">+ 2 acompanhamentos</div>
+      </div>
+      <div class="menu-price"><div class="menu-price-label">R$</div><div class="menu-price-value">119</div></div>
+    </div>
+
+    <div class="menu-item">
+      <div class="menu-bar bar-peixe"></div>
+      <div class="menu-info">
+        <div class="menu-name">Badejo</div>
+        <div class="incl-note">+ 2 acompanhamentos</div>
+      </div>
+      <div class="menu-price"><div class="menu-price-label">R$</div><div class="menu-price-value">109</div></div>
+    </div>
+
+    <div class="cat-header" style="margin-top:8px"><span class="cat-icon">🥦</span><span class="cat-name">Acompanhamentos</span><div class="cat-line"></div></div>
+
+    <div class="menu-item">
+      <div class="menu-bar bar-acomp"></div>
+      <div class="menu-info"><div class="menu-name">Arroz Branco</div></div>
+      <div class="menu-price"><div class="menu-price-label">R$</div><div class="menu-price-value">20</div></div>
+    </div>
+    <div class="menu-item">
+      <div class="menu-bar bar-acomp"></div>
+      <div class="menu-info"><div class="menu-name">Arroz com Alho</div></div>
+      <div class="menu-price"><div class="menu-price-label">R$</div><div class="menu-price-value">23</div></div>
+    </div>
+    <div class="menu-item">
+      <div class="menu-bar bar-acomp"></div>
+      <div class="menu-info"><div class="menu-name">Arroz com Brócolis</div></div>
+      <div class="menu-price"><div class="menu-price-label">R$</div><div class="menu-price-value">36</div></div>
+    </div>
+    <div class="menu-item">
+      <div class="menu-bar bar-acomp"></div>
+      <div class="menu-info"><div class="menu-name">Arroz Biro Biro</div></div>
+      <div class="menu-price"><div class="menu-price-label">R$</div><div class="menu-price-value">20</div></div>
+    </div>
+    <div class="menu-item">
+      <div class="menu-bar bar-acomp"></div>
+      <div class="menu-info"><div class="menu-name">Parrilhada de Legumes</div></div>
+      <div class="menu-price"><div class="menu-price-label">R$</div><div class="menu-price-value">23</div></div>
+    </div>
+    <div class="menu-item">
+      <div class="menu-bar bar-acomp"></div>
+      <div class="menu-info">
+        <div class="menu-name">Salada da Casa</div>
+        <div class="menu-desc">Com Muçarela de Búfala e Tomate Cereja</div>
+      </div>
+      <div class="menu-price"><div class="menu-price-label">R$</div><div class="menu-price-value">27</div></div>
+    </div>
+    <div class="menu-item">
+      <div class="menu-bar bar-acomp"></div>
+      <div class="menu-info"><div class="menu-name">Batata Frita</div></div>
+      <div class="menu-price"><div class="menu-price-label">R$</div><div class="menu-price-value">20</div></div>
+    </div>
+    <div class="menu-item">
+      <div class="menu-bar bar-acomp"></div>
+      <div class="menu-info"><div class="menu-name">Batata ao Murro com Gorgonzola</div></div>
+      <div class="menu-price"><div class="menu-price-label">R$</div><div class="menu-price-value">27</div></div>
+    </div>
+    <div class="menu-item">
+      <div class="menu-bar bar-acomp"></div>
+      <div class="menu-info"><div class="menu-name">Vinagrete</div></div>
+      <div class="menu-price"><div class="menu-price-label">R$</div><div class="menu-price-value">12</div></div>
+    </div>
+  </div>
+
+  <!-- ══ PETISCOS & SANDUÍCHES ══ -->
+  <div class="section" id="petiscos">
+
+    <div class="cat-header"><span class="cat-icon">🍢</span><span class="cat-name">Petiscos</span><div class="cat-line"></div></div>
+
+    <div class="menu-item">
+      <div class="menu-bar bar-petisco"></div>
+      <div class="menu-info">
+        <div class="menu-name">Linguiça de Pernil</div>
+        <div class="menu-desc">Com Molho de Mostarda Dijon e Cesta de Pães</div>
+      </div>
+      <div class="menu-price"><div class="menu-price-label">R$</div><div class="menu-price-value">39</div></div>
+    </div>
+
+    <div class="menu-item">
+      <div class="menu-bar bar-petisco"></div>
+      <div class="menu-info">
+        <div class="menu-name">Linguiça de Cordeiro</div>
+        <div class="menu-desc">Com Molho de Mostarda à L'ancienne e Cesta de Pães</div>
+      </div>
+      <div class="menu-price"><div class="menu-price-label">R$</div><div class="menu-price-value">39</div></div>
+    </div>
+
+    <div class="cat-header" style="margin-top:8px"><span class="cat-icon">🥪</span><span class="cat-name">Sanduíches</span><div class="cat-line"></div></div>
+
+    <div class="menu-item">
+      <div class="menu-bar bar-sanduba"></div>
+      <div class="menu-info">
+        <div class="menu-name">Cheeseburger</div>
+        <div class="menu-desc">Hambúrguer 180g, american cheese ou gorgonzola e cebola</div>
+        <div class="menu-badges"><span class="badge badge-duo">✦ Duo Gourmet</span><span class="badge badge-popular">Popular</span></div>
+      </div>
+      <div class="menu-price"><div class="menu-price-label">R$</div><div class="menu-price-value">59</div></div>
+    </div>
+
+    <div class="menu-item">
+      <div class="menu-bar bar-sanduba"></div>
+      <div class="menu-info">
+        <div class="menu-name">Lox e Bagel</div>
+        <div class="menu-desc">Salmão defumado, tomate, cebola roxa, alcaparras e cream cheese</div>
+        <div class="menu-badges"><span class="badge badge-duo">✦ Duo Gourmet</span></div>
+      </div>
+      <div class="menu-price"><div class="menu-price-label">R$</div><div class="menu-price-value">59</div></div>
+    </div>
+
+    <div class="menu-item">
+      <div class="menu-bar bar-sanduba"></div>
+      <div class="menu-info">
+        <div class="menu-name">French Dip</div>
+        <div class="menu-desc">Bife de ancho cortado fino, Swiss e jus</div>
+        <div class="menu-badges"><span class="badge badge-duo">✦ Duo Gourmet</span></div>
+      </div>
+      <div class="menu-price"><div class="menu-price-label">R$</div><div class="menu-price-value">79</div></div>
+    </div>
+
+    <div class="menu-item">
+      <div class="menu-bar bar-sanduba"></div>
+      <div class="menu-info">
+        <div class="menu-name">Gyukatsu</div>
+        <div class="menu-desc">Filé mignon, japanese mayo e molho de ostra</div>
+        <div class="menu-badges"><span class="badge badge-duo">✦ Duo Gourmet</span></div>
+      </div>
+      <div class="menu-price"><div class="menu-price-label">R$</div><div class="menu-price-value">69</div></div>
+    </div>
+  </div>
+
+  <!-- ══ SOBREMESAS ══ -->
+  <div class="section" id="sobremesas">
+
+    <div class="cat-header"><span class="cat-icon">🍮</span><span class="cat-name">Sobremesas</span><div class="cat-line"></div></div>
+
+    <div class="menu-item">
+      <div class="menu-bar bar-sobremesa"></div>
+      <div class="menu-info"><div class="menu-name">Alfajor Líquido</div></div>
+      <div class="menu-price"><div class="menu-price-label">R$</div><div class="menu-price-value">26</div></div>
+    </div>
+
+    <div class="menu-item">
+      <div class="menu-bar bar-sobremesa"></div>
+      <div class="menu-info"><div class="menu-name">Corneto de Mascarpone</div></div>
+      <div class="menu-price"><div class="menu-price-label">R$</div><div class="menu-price-value">31</div></div>
+    </div>
+
+    <div class="menu-item">
+      <div class="menu-bar bar-sobremesa"></div>
+      <div class="menu-info">
+        <div class="menu-name">Petit Gâteau e Sorvete de Creme</div>
+        <div class="menu-badges"><span class="badge badge-popular">Popular</span></div>
+      </div>
+      <div class="menu-price"><div class="menu-price-label">R$</div><div class="menu-price-value">35</div></div>
+    </div>
+
+    <div class="menu-item">
+      <div class="menu-bar bar-sobremesa"></div>
+      <div class="menu-info"><div class="menu-name">Tiramissú</div></div>
+      <div class="menu-price"><div class="menu-price-label">R$</div><div class="menu-price-value">35</div></div>
+    </div>
+
+    <div class="menu-item">
+      <div class="menu-bar bar-sobremesa"></div>
+      <div class="menu-info">
+        <div class="menu-name">Merengada</div>
+        <div class="menu-desc">Morangos frescos, suspiro, chantilly de nata e calda de morango</div>
+        <div class="menu-badges"><span class="badge badge-popular">Popular</span></div>
+      </div>
+      <div class="menu-price"><div class="menu-price-label">R$</div><div class="menu-price-value">39</div></div>
+    </div>
+
+    <div class="menu-item">
+      <div class="menu-bar bar-sobremesa"></div>
+      <div class="menu-info">
+        <div class="menu-name">Crepe de Nutella e Morango</div>
+        <div class="menu-desc">Com calda de laranja e sorvete de creme</div>
+      </div>
+      <div class="menu-price"><div class="menu-price-label">R$</div><div class="menu-price-value">39</div></div>
+    </div>
+  </div>
+
+  <!-- ══ BEBIDAS ══ -->
+  <div class="section" id="bebidas">
+
+    <div class="cat-header"><span class="cat-icon">🍺</span><span class="cat-name">Cervejas e Não-Alcoólicos</span><div class="cat-line"></div></div>
+
+    <div class="menu-item">
+      <div class="menu-bar bar-drink"></div>
+      <div class="menu-info"><div class="menu-name">Stella Artois</div></div>
+      <div class="menu-price"><div class="menu-price-label">R$</div><div class="menu-price-value">15,90</div></div>
+    </div>
+    <div class="menu-item">
+      <div class="menu-bar bar-drink"></div>
+      <div class="menu-info"><div class="menu-name">Heineken</div></div>
+      <div class="menu-price"><div class="menu-price-label">R$</div><div class="menu-price-value">15,90</div></div>
+    </div>
+    <div class="menu-item">
+      <div class="menu-bar bar-drink"></div>
+      <div class="menu-info">
+        <div class="menu-name">Corona Sem Álcool</div>
+        <div class="menu-badges"><span class="badge badge-sem-alcool">Sem Álcool</span></div>
+      </div>
+      <div class="menu-price"><div class="menu-price-label">R$</div><div class="menu-price-value">15,90</div></div>
+    </div>
+    <div class="menu-item">
+      <div class="menu-bar bar-drink"></div>
+      <div class="menu-info"><div class="menu-name">Água Mineral Ayla</div></div>
+      <div class="menu-price"><div class="menu-price-label">R$</div><div class="menu-price-value">7,90</div></div>
+    </div>
+    <div class="menu-item">
+      <div class="menu-bar bar-drink"></div>
+      <div class="menu-info"><div class="menu-name">Coffee ++</div></div>
+      <div class="menu-price"><div class="menu-price-label">R$</div><div class="menu-price-value">7,90</div></div>
+    </div>
+    <div class="menu-item">
+      <div class="menu-bar bar-drink"></div>
+      <div class="menu-info"><div class="menu-name">Energético Red Bull</div></div>
+      <div class="menu-price"><div class="menu-price-label">R$</div><div class="menu-price-value">16,90</div></div>
+    </div>
+    <div class="menu-item">
+      <div class="menu-bar bar-drink"></div>
+      <div class="menu-info">
+        <div class="menu-name">Refrigerantes</div>
+        <div class="menu-desc">Coca-Cola, Guaraná Antarctica e Schweppes Citrus</div>
+      </div>
+      <div class="menu-price"><div class="menu-price-label">R$</div><div class="menu-price-value">8,90</div></div>
+    </div>
+    <div class="menu-item">
+      <div class="menu-bar bar-drink"></div>
+      <div class="menu-info"><div class="menu-name">Shot de Limão</div></div>
+      <div class="menu-price"><div class="menu-price-label">R$</div><div class="menu-price-value">2,00</div></div>
+    </div>
+    <div class="menu-item">
+      <div class="menu-bar bar-drink"></div>
+      <div class="menu-info">
+        <div class="menu-name">Sucos Naturais</div>
+        <div class="menu-desc">Limonada, Laranja e Abacaxi</div>
+      </div>
+      <div class="menu-price"><div class="menu-price-label">R$</div><div class="menu-price-value">13,90</div></div>
+    </div>
+
+    <div class="cat-header" style="margin-top:8px"><span class="cat-icon">🍹</span><span class="cat-name">Drinks e Coquetéis</span><div class="cat-line"></div></div>
+
+    <div class="menu-item">
+      <div class="menu-bar bar-drink"></div>
+      <div class="menu-info"><div class="menu-name">Aperol Spritz</div></div>
+      <div class="menu-price"><div class="menu-price-label">R$</div><div class="menu-price-value">34,00</div></div>
+    </div>
+    <div class="menu-item">
+      <div class="menu-bar bar-drink"></div>
+      <div class="menu-info"><div class="menu-name">Caipabsolut</div></div>
+      <div class="menu-price"><div class="menu-price-label">R$</div><div class="menu-price-value">29,00</div></div>
+    </div>
+    <div class="menu-item">
+      <div class="menu-bar bar-drink"></div>
+      <div class="menu-info"><div class="menu-name">Caipirinha</div></div>
+      <div class="menu-price"><div class="menu-price-label">R$</div><div class="menu-price-value">27,00</div></div>
+    </div>
+    <div class="menu-item">
+      <div class="menu-bar bar-drink"></div>
+      <div class="menu-info"><div class="menu-name">Gin Tônica</div></div>
+      <div class="menu-price"><div class="menu-price-label">R$</div><div class="menu-price-value">32,00</div></div>
+    </div>
+    <div class="menu-item">
+      <div class="menu-bar bar-drink"></div>
+      <div class="menu-info"><div class="menu-name">Kir Royal</div></div>
+      <div class="menu-price"><div class="menu-price-label">R$</div><div class="menu-price-value">32,00</div></div>
+    </div>
+    <div class="menu-item">
+      <div class="menu-bar bar-drink"></div>
+      <div class="menu-info"><div class="menu-name">Mojito</div></div>
+      <div class="menu-price"><div class="menu-price-label">R$</div><div class="menu-price-value">29,00</div></div>
+    </div>
+    <div class="menu-item">
+      <div class="menu-bar bar-drink"></div>
+      <div class="menu-info"><div class="menu-name">Moscow Mule</div></div>
+      <div class="menu-price"><div class="menu-price-label">R$</div><div class="menu-price-value">32,00</div></div>
+    </div>
+    <div class="menu-item">
+      <div class="menu-bar bar-drink"></div>
+      <div class="menu-info">
+        <div class="menu-name">Negroni</div>
+        <div class="menu-badges"><span class="badge badge-popular">Popular</span></div>
+      </div>
+      <div class="menu-price"><div class="menu-price-label">R$</div><div class="menu-price-value">36,00</div></div>
+    </div>
+  </div>
+
+</div><!-- /content -->
+
+<div class="page-footer">
+  <div class="page-footer-name">Restaurante Benvindo · Cardápio 2026</div>
+  <div class="page-footer-sub">Preços sujeitos a alteração · Serviço de 13%, opcional</div>
+</div>
+
+<script>
+  function show(id, btn) {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    btn.classList.add('active');
+    window.scrollTo({ top: document.querySelector('.filter-wrap').offsetTop - 1, behavior: 'smooth' });
+  }
+</script>
+</body>
+</html>
