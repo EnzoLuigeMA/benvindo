@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Relatório de Anúncios · Restaurante Benvindo</title>
+<meta name="description" content="Resumo de desempenho das campanhas do Restaurante Benvindo — alcance, impressões, cliques e conversas. Maio de 2026.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Cinzel:wght@400;500&family=Lato:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0a0a0a;
+    --black-card: #141414;
+    --black-card2: #191919;
+    --gold: #c9a84c;
+    --gold-light: #e2c27d;
+    --white: #f5f0e8;
+    --white-dim: rgba(245,240,232,0.6);
+    --white-subtle: rgba(245,240,232,0.08);
+    --border: rgba(201,168,76,0.18);
+    --border-hover: rgba(201,168,76,0.45);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
+    min-height: 100vh;
+  }
+
+  /* grain */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.5;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 52px 24px 36px;
+    border-bottom: 1px solid var(--border);
+    animation: fadeDown 0.8s ease both;
+  }
+
+  .back-btn {
+    position: absolute;
+    left: 20px;
+    top: 52px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    font-family: 'Cinzel', serif;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    text-decoration: none;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+  }
+  .back-btn:hover { opacity: 1; }
+
+  .header-eyebrow {
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--gold);
+    opacity: 0.65;
+    margin-bottom: 10px;
+  }
+
+  .header-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 36px;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--white);
+    line-height: 1.1;
+    margin-bottom: 10px;
+  }
+
+  .header-sub {
+    font-size: 12px;
+    font-weight: 300;
+    color: var(--white-dim);
+    letter-spacing: 0.08em;
+  }
+
+  .header-divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 20px auto 0;
+    max-width: 220px;
+  }
+  .hdl { flex:1; height:1px; background: linear-gradient(90deg,transparent,var(--gold),transparent); opacity:.3; }
+  .hdd { width:5px; height:5px; background:var(--gold); transform:rotate(45deg); opacity:.5; }
+
+  /* ── CONTENT ── */
+  .content {
+    position: relative;
+    z-index: 1;
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 8px 16px 64px;
+  }
+
+  /* ── SECTION LABEL ── */
+  .sec-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 30px 4px 16px;
+  }
+  .sec-icon { font-size: 15px; line-height: 1; }
+  .sec-name {
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--gold);
+    opacity: 0.78;
+    white-space: nowrap;
+  }
+  .sec-line { flex:1; height:1px; background: linear-gradient(90deg, var(--border), transparent); }
+
+  /* ── KPI GRID ── */
+  .kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .kpi {
+    background: var(--black-card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 18px 18px 16px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.25s ease;
+    animation: fadeUp 0.5s ease both;
+  }
+  .kpi::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 3px;
+    background: linear-gradient(180deg, var(--gold), var(--gold-light));
+    opacity: 0.55;
+  }
+  .kpi:hover { border-color: var(--border-hover); background: var(--black-card2); transform: translateY(-2px); }
+
+  .kpi-value {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 34px;
+    font-weight: 600;
+    color: var(--gold-light);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+  .kpi-value small { font-size: 17px; color: var(--white-dim); font-weight: 500; }
+
+  .kpi-label {
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--white);
+    opacity: 0.85;
+    margin-bottom: 4px;
+  }
+  .kpi-desc {
+    font-size: 11px;
+    color: var(--white-dim);
+    line-height: 1.4;
+    letter-spacing: 0.02em;
+  }
+
+  /* ── CAMPAIGN GROUP CARD ── */
+  .camp {
+    display: flex;
+    align-items: stretch;
+    gap: 14px;
+    padding: 15px 16px;
+    background: var(--black-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    margin-bottom: 8px;
+    transition: all 0.25s ease;
+    animation: fadeUp 0.5s ease both;
+  }
+  .camp:hover { border-color: var(--border-hover); background: var(--black-card2); transform: translateX(3px); }
+
+  .camp-bar {
+    width: 3px;
+    border-radius: 99px;
+    flex-shrink: 0;
+    align-self: stretch;
+    min-height: 48px;
+  }
+  .bar-1 { background: linear-gradient(180deg,#e8d070,#c9a84c); }
+  .bar-2 { background: linear-gradient(180deg,#d4a847,#9b7520); }
+  .bar-3 { background: linear-gradient(180deg,#c87080,#8b2c3a); }
+  .bar-4 { background: linear-gradient(180deg,#c8a06a,#8b5e2c); }
+  .bar-5 { background: linear-gradient(180deg,#b0a060,#6b5a2c); }
+  .bar-6 { background: linear-gradient(180deg,#7fa0c0,#34607f); }
+
+  .camp-body { flex: 1; min-width: 0; }
+
+  .camp-top {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 3px;
+  }
+
+  .camp-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--white);
+    line-height: 1.15;
+  }
+
+  .camp-count {
+    font-family: 'Cinzel', serif;
+    font-size: 8.5px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    background: rgba(201,168,76,0.12);
+    border: 1px solid rgba(201,168,76,0.3);
+    border-radius: 20px;
+    padding: 3px 9px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .camp-obj {
+    font-family: 'Cinzel', serif;
+    font-size: 8.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--white-dim);
+    opacity: 0.7;
+    margin-bottom: 11px;
+  }
+
+  .camp-metrics {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px;
+  }
+  .metric { line-height: 1.1; }
+  .metric-v {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--gold-light);
+  }
+  .metric-l {
+    font-size: 9.5px;
+    color: var(--white-dim);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    font-family: 'Cinzel', serif;
+    margin-top: 2px;
+  }
+
+  /* ── NOTE ── */
+  .note {
+    background: rgba(201,168,76,0.06);
+    border: 1px solid rgba(201,168,76,0.15);
+    border-radius: 10px;
+    padding: 14px 16px;
+    margin-top: 22px;
+    font-size: 11px;
+    color: var(--white-dim);
+    line-height: 1.7;
+    letter-spacing: 0.02em;
+  }
+  .note strong { color: var(--gold-light); font-weight: 400; }
+
+  /* ── FOOTER ── */
+  .page-footer {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 32px 24px;
+    border-top: 1px solid var(--border);
+  }
+  .page-footer-name {
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: rgba(201,168,76,0.4);
+    margin-bottom: 6px;
+  }
+  .page-footer-sub {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 12px;
+    font-style: italic;
+    color: rgba(245,240,232,0.25);
+  }
+
+  @keyframes fadeDown { from{opacity:0;transform:translateY(-14px)} to{opacity:1;transform:translateY(0)} }
+  @keyframes fadeUp   { from{opacity:0;transform:translateY(12px)}  to{opacity:1;transform:translateY(0)} }
+
+  @media (max-width: 420px) {
+    .kpi-value { font-size: 29px; }
+    .camp-metrics { gap: 14px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <a href="benvindo-bio.html" class="back-btn">
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+    Voltar
+  </a>
+  <div class="header-eyebrow">Restaurante Benvindo</div>
+  <div class="header-title">Relatório de Anúncios</div>
+  <div class="header-sub">Maio de 2026 · Meta Ads · 29 campanhas veiculadas</div>
+  <div class="header-divider">
+    <div class="hdl"></div><div class="hdd"></div><div class="hdl"></div>
+  </div>
+</div>
+
+<div class="content">
+
+  <!-- RESUMO -->
+  <div class="sec-header">
+    <span class="sec-icon">✦</span>
+    <span class="sec-name">Resumo do mês</span>
+    <div class="sec-line"></div>
+  </div>
+
+  <div class="kpi-grid">
+
+    <div class="kpi" style="animation-delay:.04s">
+      <div class="kpi-value">285.866</div>
+      <div class="kpi-label">Impressões</div>
+      <div class="kpi-desc">Vezes que os anúncios apareceram</div>
+    </div>
+
+    <div class="kpi" style="animation-delay:.09s">
+      <div class="kpi-value">188.025<small> *</small></div>
+      <div class="kpi-label">Alcance</div>
+      <div class="kpi-desc">Pessoas alcançadas (somado)</div>
+    </div>
+
+    <div class="kpi" style="animation-delay:.14s">
+      <div class="kpi-value">434</div>
+      <div class="kpi-label">Conversas no WhatsApp</div>
+      <div class="kpi-desc">Mensagens iniciadas pelos anúncios</div>
+    </div>
+
+    <div class="kpi" style="animation-delay:.19s">
+      <div class="kpi-value">6.350</div>
+      <div class="kpi-label">Cliques no link</div>
+      <div class="kpi-desc">Toques que levaram ao destino</div>
+    </div>
+
+    <div class="kpi" style="animation-delay:.24s">
+      <div class="kpi-value">4.939</div>
+      <div class="kpi-label">Visitas ao perfil IG</div>
+      <div class="kpi-desc">Pela campanha de perfil no Instagram</div>
+    </div>
+
+    <div class="kpi" style="animation-delay:.29s">
+      <div class="kpi-value">3,09<small>%</small></div>
+      <div class="kpi-label">CTR médio</div>
+      <div class="kpi-desc">Taxa de cliques · 8.834 cliques no total</div>
+    </div>
+
+  </div>
+
+  <!-- CAMPANHAS -->
+  <div class="sec-header">
+    <span class="sec-icon">◆</span>
+    <span class="sec-name">Campanhas em destaque</span>
+    <div class="sec-line"></div>
+  </div>
+
+  <div class="camp" style="animation-delay:.04s">
+    <div class="camp-bar bar-1"></div>
+    <div class="camp-body">
+      <div class="camp-top">
+        <div class="camp-name">Perfil no Instagram</div>
+        <span class="camp-count">1 campanha</span>
+      </div>
+      <div class="camp-obj">Reconhecimento · Visitas ao perfil</div>
+      <div class="camp-metrics">
+        <div class="metric"><div class="metric-v">137.657</div><div class="metric-l">Impressões</div></div>
+        <div class="metric"><div class="metric-v">95.815</div><div class="metric-l">Alcance</div></div>
+        <div class="metric"><div class="metric-v">4.939</div><div class="metric-l">Visitas perfil</div></div>
+        <div class="metric"><div class="metric-v">3,46%</div><div class="metric-l">CTR</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="camp" style="animation-delay:.09s">
+    <div class="camp-bar bar-2"></div>
+    <div class="camp-body">
+      <div class="camp-top">
+        <div class="camp-name">Tráfego · Reservas</div>
+        <span class="camp-count">7 campanhas</span>
+      </div>
+      <div class="camp-obj">Tráfego · Conversas no WhatsApp</div>
+      <div class="camp-metrics">
+        <div class="metric"><div class="metric-v">74.193</div><div class="metric-l">Impressões</div></div>
+        <div class="metric"><div class="metric-v">42.025</div><div class="metric-l">Alcance</div></div>
+        <div class="metric"><div class="metric-v">188</div><div class="metric-l">Conversas</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="camp" style="animation-delay:.14s">
+    <div class="camp-bar bar-3"></div>
+    <div class="camp-body">
+      <div class="camp-top">
+        <div class="camp-name">Dia dos Namorados</div>
+        <span class="camp-count">10 campanhas</span>
+      </div>
+      <div class="camp-obj">Tráfego · Conversas no WhatsApp</div>
+      <div class="camp-metrics">
+        <div class="metric"><div class="metric-v">38.438</div><div class="metric-l">Impressões</div></div>
+        <div class="metric"><div class="metric-v">24.989</div><div class="metric-l">Alcance</div></div>
+        <div class="metric"><div class="metric-v">150</div><div class="metric-l">Conversas</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="camp" style="animation-delay:.19s">
+    <div class="camp-bar bar-4"></div>
+    <div class="camp-body">
+      <div class="camp-top">
+        <div class="camp-name">Menu Executivo</div>
+        <span class="camp-count">4 campanhas</span>
+      </div>
+      <div class="camp-obj">Tráfego · Conversas no WhatsApp</div>
+      <div class="camp-metrics">
+        <div class="metric"><div class="metric-v">16.900</div><div class="metric-l">Impressões</div></div>
+        <div class="metric"><div class="metric-v">10.575</div><div class="metric-l">Alcance</div></div>
+        <div class="metric"><div class="metric-v">72</div><div class="metric-l">Conversas</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="camp" style="animation-delay:.24s">
+    <div class="camp-bar bar-5"></div>
+    <div class="camp-body">
+      <div class="camp-top">
+        <div class="camp-name">Duo Gourmet</div>
+        <span class="camp-count">6 campanhas</span>
+      </div>
+      <div class="camp-obj">Tráfego · Conversas no WhatsApp</div>
+      <div class="camp-metrics">
+        <div class="metric"><div class="metric-v">11.040</div><div class="metric-l">Impressões</div></div>
+        <div class="metric"><div class="metric-v">7.460</div><div class="metric-l">Alcance</div></div>
+        <div class="metric"><div class="metric-v">24</div><div class="metric-l">Conversas</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="camp" style="animation-delay:.29s">
+    <div class="camp-bar bar-6"></div>
+    <div class="camp-body">
+      <div class="camp-top">
+        <div class="camp-name">Vídeo</div>
+        <span class="camp-count">1 campanha</span>
+      </div>
+      <div class="camp-obj">Engajamento · Visualizações de vídeo</div>
+      <div class="camp-metrics">
+        <div class="metric"><div class="metric-v">7.638</div><div class="metric-l">Impressões</div></div>
+        <div class="metric"><div class="metric-v">7.161</div><div class="metric-l">Alcance</div></div>
+        <div class="metric"><div class="metric-v">1.549</div><div class="metric-l">ThruPlays</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="note">
+    <strong>✦ Período:</strong> 1 a 31 de maio de 2026 · Fonte: Meta Ads (Benvindo Restaurante).<br>
+    <strong>* Alcance:</strong> soma do alcance de cada campanha — pode haver sobreposição de pessoas entre elas.<br>
+    As <strong>conversas</strong> representam mensagens iniciadas no WhatsApp/Direct. Valores de investimento não incluídos.
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="page-footer">
+  <div class="page-footer-name">Restaurante Benvindo · Relatório de Anúncios</div>
+  <div class="page-footer-sub">Desempenho de mídia · Maio de 2026</div>
+</div>
+
+</body>
+</html>
