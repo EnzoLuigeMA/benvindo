@@ -6,6 +6,7 @@
     { "src": "/namorados", "dest": "/namorados.html" },
     { "src": "/dashboard", "dest": "/dashboard.html" },
     { "src": "/dia-dos-pais", "dest": "/dia-dos-pais.html" },
-    { "src": "/pais", "dest": "/dia-dos-pais.html" }
+    { "src": "/pais", "dest": "/dia-dos-pais.html" },
+    { "src": "/fechamento07", "dest": "/fechamento07.html" }
   ]
 }
