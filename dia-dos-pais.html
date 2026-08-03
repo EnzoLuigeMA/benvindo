@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dia dos Pais · Restaurante Benvindo</title>
+<meta name="description" content="Menu especial de Dia dos Pais no Restaurante Benvindo — domingo, 9 de agosto. Menu Clássico R$ 169 e Menu Premium R$ 239. Vagas limitadas por turno.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=Cinzel:wght@400;500&family=Lato:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0a0a0a;
+    --card: #141414;
+    --card2: #1a1512;
+    --amber: #b8763a;
+    --amber-light: #e0a668;
+    --white: #f5f0e8;
+    --dim: rgba(245,240,232,0.6);
+    --border: rgba(184,118,58,0.22);
+    --border-hi: rgba(184,118,58,0.55);
+    /* vinho — usado apenas no card de vinho */
+    --wine: #7a2032;
+    --wine-mid: #a83048;
+    --wine-light: #e0a0ac;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
+    min-height: 100vh;
+  }
+
+  /* ── GRAIN ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.55;
+  }
+
+  /* ── GLOW ÂMBAR NO TOPO ── */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 620px 420px at 50% 0%, rgba(184,118,58,0.10) 0%, transparent 70%),
+      radial-gradient(ellipse 420px 320px at 100% 55%, rgba(184,118,58,0.05) 0%, transparent 60%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 52px 24px 38px;
+    border-bottom: 1px solid var(--border);
+    animation: fadeDown 0.8s ease both;
+  }
+
+  .back-btn {
+    position: absolute;
+    left: 20px;
+    top: 52px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    font-family: 'Cinzel', serif;
+    letter-spacing: 0.2em;
+    color: var(--amber-light);
+    text-decoration: none;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+  }
+  .back-btn:hover { opacity: 1; }
+
+  .header-icon {
+    font-size: 30px;
+    line-height: 1;
+    display: block;
+    margin-bottom: 14px;
+  }
+
+  .header-eyebrow {
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--amber);
+    opacity: 0.8;
+    margin-bottom: 12px;
+  }
+
+  .header-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 40px;
+    font-weight: 400;
+    font-style: italic;
+    color: var(--white);
+    line-height: 1.08;
+    margin-bottom: 16px;
+  }
+  .header-title .ht-sub {
+    display: block;
+    font-size: 21px;
+    color: var(--dim);
+    letter-spacing: 0.02em;
+    margin-bottom: 2px;
+  }
+  .header-title .ht-main { display: block; color: var(--amber-light); }
+
+  .header-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(184,118,58,0.13);
+    border: 1px solid rgba(184,118,58,0.42);
+    border-radius: 100px;
+    padding: 5px 14px;
+  }
+
+  .badge-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--amber-light);
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  .badge-text {
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--amber-light);
+  }
+
+  .header-divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 22px auto 0;
+    max-width: 220px;
+  }
+  .hdl { flex:1; height:1px; background: linear-gradient(90deg,transparent,var(--amber),transparent); opacity:.35; }
+  .hdd { width:5px; height:5px; background:var(--amber); transform:rotate(45deg); opacity:.55; }
+
+  /* ── CONTENT ── */
+  .content {
+    position: relative;
+    z-index: 1;
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 26px 16px 64px;
+  }
+
+  /* ── BARRA DE ESCASSEZ ── */
+  .scarcity {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    background: linear-gradient(135deg, rgba(184,118,58,0.10), rgba(184,118,58,0.04));
+    border: 1px solid var(--border-hi);
+    border-radius: 14px;
+    padding: 15px 18px;
+    margin-bottom: 30px;
+    animation: fadeUp 0.6s 0.1s ease both;
+  }
+
+  .scarcity-icon { font-size: 19px; line-height: 1.2; flex-shrink: 0; }
+
+  .scarcity-text {
+    font-size: 12px;
+    color: var(--dim);
+    line-height: 1.65;
+    letter-spacing: 0.02em;
+  }
+  .scarcity-text strong { color: var(--amber-light); font-weight: 400; }
+
+  /* ── CARD DE MENU ── */
+  .tier {
+    position: relative;
+    border-radius: 18px;
+    padding: 24px 22px 22px;
+    margin-bottom: 22px;
+    overflow: hidden;
+    background: var(--card);
+    border: 1px solid var(--border);
+    animation: fadeUp 0.6s ease both;
+  }
+
+  .tier.premium {
+    border: 1.5px solid var(--border-hi);
+    background: linear-gradient(150deg, #1c130a 0%, #100c07 55%, #180f08 100%);
+  }
+  .tier.premium::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 22% 0%, rgba(184,118,58,0.16) 0%, transparent 62%),
+      radial-gradient(ellipse at 88% 12%, rgba(184,118,58,0.09) 0%, transparent 55%);
+    pointer-events: none;
+  }
+  .tier > * { position: relative; z-index: 1; }
+
+  /* ribbon canto superior direito */
+  .ribbon {
+    position: absolute;
+    z-index: 2;
+    top: 17px;
+    right: -46px;
+    width: 178px;
+    transform: rotate(45deg);
+    background: linear-gradient(90deg, var(--amber), #8a5426);
+    color: #150d06;
+    text-align: center;
+    padding: 5px 0;
+    font-family: 'Cinzel', serif;
+    font-size: 8.5px;
+    font-weight: 500;
+    line-height: 1.2;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.45);
+  }
+
+  /* reserva o canto para o ribbon — evita sobrepor o preco */
+  .tier.premium .tier-head { padding-right: 52px; }
+
+  .tier-head {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 14px;
+    padding-bottom: 16px;
+    margin-bottom: 4px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .tier-label {
+    font-family: 'Cinzel', serif;
+    font-size: 8.5px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--amber);
+    opacity: 0.72;
+    margin-bottom: 5px;
+  }
+
+  .tier-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 27px;
+    font-weight: 600;
+    font-style: italic;
+    color: var(--white);
+    line-height: 1;
+  }
+  .tier.premium .tier-name { color: var(--amber-light); }
+
+  .tier-price { text-align: right; flex-shrink: 0; }
+
+  .tier-price-value {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 30px;
+    font-weight: 600;
+    color: var(--amber-light);
+    line-height: 1;
+    white-space: nowrap;
+  }
+
+  .tier-price-label {
+    font-family: 'Cinzel', serif;
+    font-size: 8.5px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--dim);
+    margin-top: 5px;
+  }
+
+  /* ── CURSO ── */
+  .course { margin-top: 18px; }
+
+  .course-head {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    margin-bottom: 10px;
+  }
+
+  .course-name {
+    font-family: 'Cinzel', serif;
+    font-size: 9.5px;
+    font-weight: 500;
+    letter-spacing: 0.26em;
+    text-transform: uppercase;
+    color: var(--amber);
+    opacity: 0.85;
+    white-space: nowrap;
+  }
+
+  .course-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, var(--border-hi), transparent);
+  }
+
+  .course-pick {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 13px;
+    color: var(--dim);
+    white-space: nowrap;
+    letter-spacing: 0.02em;
+  }
+
+  /* ── PRATO ── */
+  .dish {
+    display: flex;
+    align-items: flex-start;
+    gap: 11px;
+    padding: 9px 12px;
+    border: 1px solid transparent;
+    border-radius: 10px;
+    transition: all 0.22s ease;
+  }
+  .dish:hover {
+    border-color: var(--border-hi);
+    background: rgba(184,118,58,0.07);
+  }
+
+  .dish-mark {
+    color: var(--amber);
+    font-size: 8px;
+    line-height: 1.9;
+    flex-shrink: 0;
+    opacity: 0.85;
+  }
+
+  .dish-info { flex: 1; min-width: 0; }
+
+  .dish-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--white);
+    line-height: 1.25;
+  }
+
+  .dish-desc {
+    font-size: 11px;
+    font-weight: 300;
+    color: var(--dim);
+    line-height: 1.5;
+    letter-spacing: 0.02em;
+    margin-top: 2px;
+  }
+
+  /* ── CARD DE VINHO ── */
+  .wine {
+    position: relative;
+    border-radius: 18px;
+    overflow: hidden;
+    padding: 22px;
+    margin: 30px 0 26px;
+    border: 1px solid rgba(168,48,72,0.42);
+    background: linear-gradient(150deg, #1e0c12 0%, #120609 58%, #1a0a10 100%);
+    animation: fadeUp 0.6s ease both;
+  }
+  .wine::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 25% 40%, rgba(168,48,72,0.16) 0%, transparent 62%);
+    pointer-events: none;
+  }
+  .wine > * { position: relative; z-index: 1; }
+
+  .wine-top {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .wine-icon { font-size: 30px; line-height: 1; flex-shrink: 0; }
+
+  .wine-info { flex: 1; min-width: 0; }
+
+  .wine-label {
+    font-family: 'Cinzel', serif;
+    font-size: 8.5px;
+    letter-spacing: 0.26em;
+    text-transform: uppercase;
+    color: var(--wine-light);
+    opacity: 0.75;
+    margin-bottom: 7px;
+  }
+
+  .wine-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--white);
+    line-height: 1.2;
+    margin-bottom: 4px;
+  }
+
+  .wine-desc {
+    font-size: 11.5px;
+    color: var(--dim);
+    line-height: 1.5;
+    letter-spacing: 0.02em;
+  }
+
+  .wine-tag {
+    display: inline-block;
+    font-family: 'Cinzel', serif;
+    font-size: 8.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--wine-light);
+    background: rgba(168,48,72,0.18);
+    border: 1px solid rgba(168,48,72,0.45);
+    border-radius: 20px;
+    padding: 3px 10px;
+    margin-top: 10px;
+  }
+
+  .wine-price {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin-top: 16px;
+    padding-top: 14px;
+    border-top: 1px solid rgba(168,48,72,0.22);
+  }
+
+  .wine-price-old {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    color: rgba(245,240,232,0.34);
+    text-decoration: line-through;
+  }
+
+  .wine-price-new {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 32px;
+    font-weight: 600;
+    color: var(--wine-light);
+    line-height: 1;
+  }
+
+  .wine-price-note {
+    font-family: 'Cinzel', serif;
+    font-size: 8.5px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--dim);
+    margin-left: auto;
+  }
+
+  /* ── TURNOS ── */
+  .turnos {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 18px 20px;
+    margin-bottom: 22px;
+    animation: fadeUp 0.6s ease both;
+  }
+
+  .turnos-title {
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--amber);
+    opacity: 0.78;
+    margin-bottom: 14px;
+  }
+
+  .turno-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 9px 0;
+    border-bottom: 1px solid rgba(245,240,232,0.06);
+  }
+  .turno-row:last-child { border-bottom: none; }
+
+  .turno-label {
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--amber-light);
+    opacity: 0.78;
+  }
+
+  .turno-time {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--white);
+    letter-spacing: 0.02em;
+  }
+
+  /* ── CTA ── */
+  .cta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    width: 100%;
+    padding: 18px 24px;
+    background: linear-gradient(135deg, rgba(184,118,58,0.30), rgba(110,62,22,0.34));
+    border: 1.5px solid var(--border-hi);
+    border-radius: 14px;
+    text-decoration: none;
+    color: var(--amber-light);
+    transition: all 0.3s ease;
+    animation: fadeUp 0.6s ease both;
+  }
+  .cta:hover {
+    background: linear-gradient(135deg, rgba(184,118,58,0.46), rgba(110,62,22,0.5));
+    border-color: rgba(184,118,58,0.85);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(184,118,58,0.22);
+  }
+
+  .cta-text {
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+  }
+
+  /* ── NOTA FINAL ── */
+  .final-note {
+    font-size: 11px;
+    color: rgba(245,240,232,0.35);
+    text-align: center;
+    line-height: 1.7;
+    margin-top: 18px;
+    font-style: italic;
+    letter-spacing: 0.03em;
+  }
+
+  /* ── FOOTER ── */
+  .page-footer {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 30px 24px;
+    border-top: 1px solid var(--border);
+  }
+  .page-footer-name {
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: rgba(184,118,58,0.45);
+    margin-bottom: 5px;
+  }
+  .page-footer-sub {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 12px;
+    font-style: italic;
+    color: rgba(245,240,232,0.25);
+  }
+
+  /* ── ANIMAÇÕES ── */
+  @keyframes fadeDown { from{opacity:0;transform:translateY(-14px)} to{opacity:1;transform:translateY(0)} }
+  @keyframes fadeUp   { from{opacity:0;transform:translateY(12px)}  to{opacity:1;transform:translateY(0)} }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.45; transform: scale(0.8); }
+  }
+
+  @media (max-width: 400px) {
+    .header-title { font-size: 33px; }
+    .header-title .ht-sub { font-size: 18px; }
+    .tier { padding: 22px 16px 18px; }
+    .tier-name { font-size: 24px; }
+    .tier-price-value { font-size: 26px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══════════ HEADER ══════════ -->
+<div class="header">
+  <a href="benvindo-bio.html" class="back-btn">
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+    Voltar
+  </a>
+
+  <span class="header-icon">🥃</span>
+  <div class="header-eyebrow">Restaurante Benvindo</div>
+  <div class="header-title">
+    <span class="ht-sub">Menu Especial</span>
+    <span class="ht-main">Dia dos Pais</span>
+  </div>
+
+  <div class="header-badge">
+    <span class="badge-dot"></span>
+    <span class="badge-text">Domingo · 9 de Agosto</span>
+  </div>
+
+  <div class="header-divider">
+    <div class="hdl"></div><div class="hdd"></div><div class="hdl"></div>
+  </div>
+</div>
+
+<div class="content">
+
+  <!-- ══════════ ESCASSEZ ══════════ -->
+  <div class="scarcity">
+    <span class="scarcity-icon">⏳</span>
+    <div class="scarcity-text">
+      Servido <strong>exclusivamente no domingo, 9 de agosto</strong>.<br>
+      Vagas limitadas por turno — reservas confirmadas mediante sinal.
+    </div>
+  </div>
+
+  <!-- ══════════ MENU PREMIUM ══════════ -->
+  <div class="tier premium" style="animation-delay:.16s">
+    <div class="ribbon">Mais Completo</div>
+
+    <div class="tier-head">
+      <div>
+        <div class="tier-label">Menu</div>
+        <div class="tier-name">Premium</div>
+      </div>
+      <div class="tier-price">
+        <div class="tier-price-value">R$ 239</div>
+        <div class="tier-price-label">por pessoa</div>
+      </div>
+    </div>
+
+    <!-- Entrada -->
+    <div class="course">
+      <div class="course-head">
+        <span class="course-name">Entrada</span>
+        <div class="course-line"></div>
+        <span class="course-pick">escolha 1</span>
+      </div>
+
+      <div class="dish">
+        <span class="dish-mark">◆</span>
+        <div class="dish-info">
+          <div class="dish-name">Burrata ao Pesto</div>
+        </div>
+      </div>
+
+      <div class="dish">
+        <span class="dish-mark">◆</span>
+        <div class="dish-info">
+          <div class="dish-name">Alcachofras à Judeia</div>
+          <div class="dish-desc">Aioli de anchovas, pecorino, limão e hortelã</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Prato Principal -->
+    <div class="course">
+      <div class="course-head">
+        <span class="course-name">Prato Principal</span>
+        <div class="course-line"></div>
+        <span class="course-pick">escolha 1</span>
+      </div>
+
+      <div class="dish">
+        <span class="dish-mark">◆</span>
+        <div class="dish-info">
+          <div class="dish-name">Bacalhau Mediterrâneo</div>
+          <div class="dish-desc">Com gratin de batatas</div>
+        </div>
+      </div>
+
+      <div class="dish">
+        <span class="dish-mark">◆</span>
+        <div class="dish-info">
+          <div class="dish-name">Atum em Crosta de Gergelim</div>
+          <div class="dish-desc">Com arroz negro</div>
+        </div>
+      </div>
+
+      <div class="dish">
+        <span class="dish-mark">◆</span>
+        <div class="dish-info">
+          <div class="dish-name">Filé Benvindo</div>
+          <div class="dish-desc">Nosso carro-chefe da casa</div>
+        </div>
+      </div>
+
+      <div class="dish">
+        <span class="dish-mark">◆</span>
+        <div class="dish-info">
+          <div class="dish-name">Camarão à Provençal</div>
+          <div class="dish-desc">Com risoto de limão siciliano</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sobremesa -->
+    <div class="course">
+      <div class="course-head">
+        <span class="course-name">Sobremesa</span>
+        <div class="course-line"></div>
+        <span class="course-pick">escolha 1</span>
+      </div>
+
+      <div class="dish">
+        <span class="dish-mark">◆</span>
+        <div class="dish-info">
+          <div class="dish-name">Corneto de Mascarpone</div>
+        </div>
+      </div>
+
+      <div class="dish">
+        <span class="dish-mark">◆</span>
+        <div class="dish-info">
+          <div class="dish-name">Tiramissù</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════ MENU CLÁSSICO ══════════ -->
+  <div class="tier" style="animation-delay:.24s">
+    <div class="tier-head">
+      <div>
+        <div class="tier-label">Menu</div>
+        <div class="tier-name">Clássico</div>
+      </div>
+      <div class="tier-price">
+        <div class="tier-price-value">R$ 169</div>
+        <div class="tier-price-label">por pessoa</div>
+      </div>
+    </div>
+
+    <!-- Entrada -->
+    <div class="course">
+      <div class="course-head">
+        <span class="course-name">Entrada</span>
+        <div class="course-line"></div>
+        <span class="course-pick">escolha 1</span>
+      </div>
+
+      <div class="dish">
+        <span class="dish-mark">◆</span>
+        <div class="dish-info">
+          <div class="dish-name">Burrata ao Pesto</div>
+        </div>
+      </div>
+
+      <div class="dish">
+        <span class="dish-mark">◆</span>
+        <div class="dish-info">
+          <div class="dish-name">Alcachofras à Judeia</div>
+          <div class="dish-desc">Aioli de anchovas, pecorino, limão e hortelã</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Prato Principal -->
+    <div class="course">
+      <div class="course-head">
+        <span class="course-name">Prato Principal</span>
+        <div class="course-line"></div>
+        <span class="course-pick">escolha 1</span>
+      </div>
+
+      <div class="dish">
+        <span class="dish-mark">◆</span>
+        <div class="dish-info">
+          <div class="dish-name">Linguado à Provençal</div>
+        </div>
+      </div>
+
+      <div class="dish">
+        <span class="dish-mark">◆</span>
+        <div class="dish-info">
+          <div class="dish-name">Steak au Poivre</div>
+          <div class="dish-desc">Espinafre salteado e batatas fritas</div>
+        </div>
+      </div>
+
+      <div class="dish">
+        <span class="dish-mark">◆</span>
+        <div class="dish-info">
+          <div class="dish-name">Escalope de Filé</div>
+          <div class="dish-desc">Com risoto de funghi</div>
+        </div>
+      </div>
+
+      <div class="dish">
+        <span class="dish-mark">◆</span>
+        <div class="dish-info">
+          <div class="dish-name">Risoto de Camarão</div>
+          <div class="dish-desc">Com queijo brie</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sobremesa -->
+    <div class="course">
+      <div class="course-head">
+        <span class="course-name">Sobremesa</span>
+        <div class="course-line"></div>
+        <span class="course-pick">escolha 1</span>
+      </div>
+
+      <div class="dish">
+        <span class="dish-mark">◆</span>
+        <div class="dish-info">
+          <div class="dish-name">Corneto de Mascarpone</div>
+        </div>
+      </div>
+
+      <div class="dish">
+        <span class="dish-mark">◆</span>
+        <div class="dish-info">
+          <div class="dish-name">Tiramissù</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════ VINHO ══════════ -->
+  <div class="wine" style="animation-delay:.3s">
+    <div class="wine-top">
+      <span class="wine-icon">🍷</span>
+      <div class="wine-info">
+        <div class="wine-label">Seleção Especial do Dia</div>
+        <div class="wine-name">Cartuxa EA · Branco ou Tinto</div>
+        <div class="wine-desc">Alentejo, Portugal — harmoniza com todo o menu</div>
+        <span class="wine-tag">Só no Dia dos Pais</span>
+      </div>
+    </div>
+    <div class="wine-price">
+      <span class="wine-price-old">R$ 169</span>
+      <span class="wine-price-new">R$ 99</span>
+      <span class="wine-price-note">a garrafa</span>
+    </div>
+  </div>
+
+  <!-- ══════════ TURNOS ══════════ -->
+  <div class="turnos" style="animation-delay:.36s">
+    <div class="turnos-title">Turnos de reserva · Domingo, 9 de agosto</div>
+    <div class="turno-row">
+      <span class="turno-label">1º Almoço</span>
+      <span class="turno-time">12h00 — 15h00</span>
+    </div>
+    <div class="turno-row">
+      <span class="turno-label">2º Almoço</span>
+      <span class="turno-time">15h30 — 18h00</span>
+    </div>
+    <div class="turno-row">
+      <span class="turno-label">Jantar</span>
+      <span class="turno-time">19h00 — 23h00</span>
+    </div>
+  </div>
+
+  <!-- ══════════ CTA ══════════ -->
+  <a href="https://api.whatsapp.com/send?phone=5531983945467&text=Ol%C3%A1!%20Quero%20reservar%20para%20o%20Dia%20dos%20Pais%20(domingo%2C%209%2F08)." target="_blank" rel="noopener noreferrer" class="cta" style="animation-delay:.42s">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+    </svg>
+    <span class="cta-text">Reservar pelo WhatsApp</span>
+  </a>
+
+  <!-- ══════════ NOTA FINAL ══════════ -->
+  <p class="final-note">
+    Reservas confirmadas mediante sinal de 50%.<br>
+    Serviço de 13% opcional · Bebidas não inclusas no valor do menu.
+  </p>
+
+</div>
+
+<!-- ══════════ FOOTER ══════════ -->
+<div class="page-footer">
+  <div class="page-footer-name">Restaurante Benvindo · Dia dos Pais</div>
+  <div class="page-footer-sub">Uma mesa à altura dele</div>
+</div>
+
+</body>
+</html>

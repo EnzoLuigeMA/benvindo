@@ -4,6 +4,8 @@
     { "src": "/cardapio", "dest": "/cardapio.html" },
     { "src": "/carta-de-vinhos", "dest": "/carta-de-vinhos.html" },
     { "src": "/namorados", "dest": "/namorados.html" },
-    { "src": "/dashboard", "dest": "/dashboard.html" }
+    { "src": "/dashboard", "dest": "/dashboard.html" },
+    { "src": "/dia-dos-pais", "dest": "/dia-dos-pais.html" },
+    { "src": "/pais", "dest": "/dia-dos-pais.html" }
   ]
 }
