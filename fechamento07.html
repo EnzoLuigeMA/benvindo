@@ -181,7 +181,8 @@ color:var(--dim2);white-space:nowrap;padding:0 4px}
 
 <div class="tabs">
   <button class="tab active" onclick="showTab('salao',this)">🍽 Salão</button>
-  <button class="tab ifd" onclick="showTab('ifood',this)">🛵 iFood · Anúncios</button>
+  <button class="tab ifd" onclick="showTab('ifood',this)">🛵 iFood</button>
+  <button class="tab" onclick="showTab('mkt',this)">📣 Marketing</button>
 </div>
 
 <div class="pane active" id="salao">
@@ -555,10 +556,20 @@ color:var(--dim2);white-space:nowrap;padding:0 4px}
 
 <div class="kpis">
   <div class="kpi hero ifd">
-    <div class="k-l">Faturamento iFood · canal completo</div>
-    <div class="k-v"><span class="k-rs">R$</span>31.850,59<span class="dt">▲ +22,37%</span></div>
-    <div class="k-s">231 pedidos no mês · média diária de R$ 1.027,44</div>
-    <div class="badge-ok">◆ Melhor mês do canal · +R$ 5,8 mil vs junho</div>
+    <div class="k-l">Faturamento líquido iFood</div>
+    <div class="k-v"><span class="k-rs">R$</span>20.744,35</div>
+    <div class="k-s">O que entra de fato, após taxas e comissões · de R$ 31.822,39 em vendas</div>
+    <div class="badge-ok">◆ Cada R$ 100 vendidos rendem R$ 65,20</div>
+  </div>
+  <div class="kpi ifd">
+    <div class="k-l">Vendas brutas</div>
+    <div class="k-v"><span class="k-rs">R$</span>31.822,39</div>
+    <div class="k-s"><span class="dt" style="margin-left:0">▲ +22,37%</span> · topline vs junho</div>
+  </div>
+  <div class="kpi ifd">
+    <div class="k-l">Descontos da plataforma</div>
+    <div class="k-v"><span class="k-rs">R$</span>−11.078,04</div>
+    <div class="k-s">34,8% das vendas · taxas, comissões e promoções</div>
   </div>
   <div class="kpi ifd">
     <div class="k-l">Pedidos realizados</div>
@@ -587,6 +598,51 @@ color:var(--dim2);white-space:nowrap;padding:0 4px}
 </div>
 
 <div class="sec">
+  <div class="sec-h"><span class="sec-t ifd">Faturamento · da venda ao caixa</span><div class="sec-l ifd"></div></div>
+  <div class="card">
+    <div class="bar-row">
+      <div class="bar-label">Valor das vendas</div>
+      <div class="bar-track"><div class="bar-fill" style="width:100%;background:linear-gradient(90deg,#c9a84c,#c9a84caa)"></div></div>
+      <div class="bar-val">R$ 31.822,39</div>
+      <div class="bar-pct">100%</div>
+    </div>
+    <div class="bar-row">
+      <div class="bar-label">− Taxas e comissões</div>
+      <div class="bar-track"><div class="bar-fill" style="width:25.0%;background:linear-gradient(90deg,#e04a3a,#e04a3aaa)"></div></div>
+      <div class="bar-val" style="color:#f08878">−R$ 7.942,86</div>
+      <div class="bar-pct">25,0%</div>
+    </div>
+    <div class="bar-row">
+      <div class="bar-label">− Serviços e promoções</div>
+      <div class="bar-track"><div class="bar-fill" style="width:9.9%;background:linear-gradient(90deg,#e04a3a,#e04a3aaa)"></div></div>
+      <div class="bar-val" style="color:#f08878">−R$ 3.161,34</div>
+      <div class="bar-pct">9,9%</div>
+    </div>
+    <div class="bar-row">
+      <div class="bar-label">+ Ajustes</div>
+      <div class="bar-track"><div class="bar-fill" style="width:1%;background:linear-gradient(90deg,#7a9a4a,#7a9a4aaa)"></div></div>
+      <div class="bar-val" style="color:#a0c470">+R$ 26,16</div>
+      <div class="bar-pct">0,1%</div>
+    </div>
+    <div class="bar-row" style="border-top:1px solid var(--bd-hi);border-bottom:none;margin-top:6px;padding-top:14px">
+      <div class="bar-label" style="color:var(--gold-l)">Total faturamento</div>
+      <div class="bar-track"><div class="bar-fill" style="width:65.2%;background:linear-gradient(90deg,#c9a84c,#e2c27d)"></div></div>
+      <div class="bar-val" style="color:var(--gold-l)">R$ 20.744,35</div>
+      <div class="bar-pct" style="color:var(--gold)">65,2%</div>
+    </div>
+  </div>
+  <div class="note">
+    <span class="note-i">🧾</span>
+    <div class="note-t">
+      De cada <b>R$ 100</b> vendidos no iFood, a plataforma retém <b>R$ 34,80</b> em taxas,
+      comissões e promoções — <b>R$ 65,20</b> ficam com a casa. No mês foram <b>R$ 11.078</b>
+      retidos sobre R$ 31.822 em vendas, e o que entrou de fato foi <b>R$ 20.744,35</b>.
+      As demais métricas desta aba usam as vendas brutas.
+    </div>
+  </div>
+</div>
+
+<div class="sec">
   <div class="sec-h"><span class="sec-t ifd">Anúncios × Orgânico</span><div class="sec-l ifd"></div></div>
   <div class="g2">
     <div class="card">
@@ -599,7 +655,7 @@ color:var(--dim2);white-space:nowrap;padding:0 4px}
       <div class="bar-row">
         <div class="bar-label">Receita · orgânico</div>
         <div class="bar-track"><div class="bar-fill" style="width:76.4%;background:linear-gradient(90deg,#c9a84c,#c9a84caa)"></div></div>
-        <div class="bar-val">R$ 24.325</div>
+        <div class="bar-val">R$ 24.297</div>
         <div class="bar-pct">76.4%</div>
       </div>
       <div class="bar-row">
@@ -633,14 +689,14 @@ color:var(--dim2);white-space:nowrap;padding:0 4px}
           <circle cx="90" cy="90" r="70" fill="none" stroke="#e04a3a" stroke-width="26" stroke-dasharray="103.93 335.89" stroke-dashoffset="0" transform="rotate(-90 90 90)"/>
           <circle cx="90" cy="90" r="70" fill="none" stroke="#c9a84c" stroke-width="26" stroke-dasharray="335.89 103.93" stroke-dashoffset="-103.93" transform="rotate(-90 90 90)"/>
         </svg>
-        <div class="donut-c"><div class="dc-v">R$ 31,9k</div><div class="dc-l">Canal iFood</div></div>
+        <div class="donut-c"><div class="dc-v">R$ 31,8k</div><div class="dc-l">Canal iFood</div></div>
       </div>
       <div class="lgs">
         <div class="lg"><span class="dot" style="background:#e04a3a"></span><span class="lg-n">Vindo de anúncios</span><span class="lg-v">23.6%</span></div>
         <div class="lg"><span class="dot" style="background:#c9a84c"></span><span class="lg-n">Orgânico da plataforma</span><span class="lg-v">76.4%</span></div>
       </div>
       <div style="font-size:11px;color:var(--dim);line-height:1.6;text-align:center;padding-top:4px">
-        Ticket orgânico: <b style="color:var(--gold-l);font-weight:400">R$ 139,80</b><br>
+        Ticket orgânico: <b style="color:var(--gold-l);font-weight:400">R$ 139,64</b><br>
         Ticket via ads: <b style="color:#f08878;font-weight:400">R$ 132,03</b>
       </div>
     </div>
@@ -707,7 +763,7 @@ color:var(--dim2);white-space:nowrap;padding:0 4px}
     <div class="cmp">
       <div class="cmp-l"><div class="cmp-v">R$ 259.771</div><div class="cmp-n">Faturamento salão · 89,1%</div></div>
       <div class="cmp-mid">versus</div>
-      <div class="cmp-r"><div class="cmp-v">R$ 31.851</div><div class="cmp-n">Faturamento iFood · 10,9%</div></div>
+      <div class="cmp-r"><div class="cmp-v">R$ 31.822</div><div class="cmp-n">Vendas iFood · 10,9%</div></div>
     </div>
     <div class="cmp">
       <div class="cmp-l"><div class="cmp-v">R$ 97,94</div><div class="cmp-n">Ticket médio por prato</div></div>
@@ -728,10 +784,10 @@ color:var(--dim2);white-space:nowrap;padding:0 4px}
   <div class="note">
     <span class="note-i">ℹ️</span>
     <div class="note-t">
-      Somando os dois canais, julho fechou em <b>R$ 291.622</b>. Atenção na terceira linha:
-      o ticket do salão é <b>por prato</b> e o do iFood é <b>por pedido</b> — uma mesa do salão
-      normalmente soma vários pratos, então os dois números não são diretamente comparáveis.
-      Os valores do iFood são <b>brutos</b>, antes da comissão da plataforma.
+      Somando as vendas dos dois canais, julho fechou em <b>R$ 291.593</b> (bruto). No iFood,
+      após R$ 11.078 de taxas e comissões, o <b>faturamento líquido foi R$ 20.744,35</b>.
+      Atenção na terceira linha: o ticket do salão é <b>por prato</b> e o do iFood é
+      <b>por pedido</b> — uma mesa soma vários pratos, então não são comparáveis direto.
     </div>
   </div>
 </div>
@@ -757,7 +813,7 @@ color:var(--dim2);white-space:nowrap;padding:0 4px}
     </div>
     <div class="ins-c ifd">
       <div class="ins-t">O orgânico sustenta o canal</div>
-      <div class="ins-d">174 pedidos e <b>R$ 24.325</b> vieram sem custo de mídia, com ticket de <b>R$ 139,80</b> — acima do ticket dos anúncios (R$ 132,03). É base recorrente: gente que já conhece a casa e pede mais.</div>
+      <div class="ins-d">174 pedidos e <b>R$ 24.297</b> vieram sem custo de mídia, com ticket de <b>R$ 139,64</b> — acima do ticket dos anúncios (R$ 132,03). É base recorrente: gente que já conhece a casa e pede mais.</div>
     </div>
     <div class="ins-c warn">
       <div class="ins-t">Conversão de 6% é o gargalo</div>
@@ -775,6 +831,108 @@ color:var(--dim2);white-space:nowrap;padding:0 4px}
 </div>
 
 </div><!-- /pane ifood -->
+
+<!-- ══════════ ABA MARKETING ══════════ -->
+<div class="pane" id="mkt">
+
+<div class="kpis">
+  <div class="kpi hero">
+    <div class="k-l">Investimento em marketing</div>
+    <div class="k-v"><span class="k-rs">R$</span>4.897,00</div>
+    <div class="k-s">Meta Ads + prestação de serviço · julho de 2026</div>
+    <div class="badge-ok">◆ Meta Ads 61,3% · Serviço 38,7%</div>
+  </div>
+  <div class="kpi">
+    <div class="k-l">Meta Ads</div>
+    <div class="k-v"><span class="k-rs">R$</span>3.000,00</div>
+    <div class="k-s">61,3% · Instagram e Facebook</div>
+  </div>
+  <div class="kpi">
+    <div class="k-l">Prestação de serviço</div>
+    <div class="k-v"><span class="k-rs">R$</span>1.897,00</div>
+    <div class="k-s">38,7% · gestão de mídia</div>
+  </div>
+  <div class="kpi">
+    <div class="k-l">iFood Ads · à parte</div>
+    <div class="k-v"><span class="k-rs">R$</span>650,86</div>
+    <div class="k-s">Anúncios dentro da plataforma</div>
+  </div>
+</div>
+
+<div class="sec">
+  <div class="sec-h"><span class="sec-t">Onde foi o investimento</span><div class="sec-l"></div></div>
+  <div class="g2">
+    <div class="card">
+      <div class="bar-row">
+        <div class="bar-label">Meta Ads</div>
+        <div class="bar-track"><div class="bar-fill" style="width:100%;background:linear-gradient(90deg,#c9a84c,#c9a84caa)"></div></div>
+        <div class="bar-val">R$ 3.000</div>
+        <div class="bar-pct">61,3%</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">Prestação de serviço</div>
+        <div class="bar-track"><div class="bar-fill" style="width:63.2%;background:linear-gradient(90deg,#4a7fa5,#4a7fa5aa)"></div></div>
+        <div class="bar-val">R$ 1.897</div>
+        <div class="bar-pct">38,7%</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">iFood Ads</div>
+        <div class="bar-track"><div class="bar-fill" style="width:21.7%;background:linear-gradient(90deg,#e04a3a,#e04a3aaa)"></div></div>
+        <div class="bar-val">R$ 651</div>
+        <div class="bar-pct">à parte</div>
+      </div>
+      <div class="bar-row" style="border-top:1px solid var(--bd-hi);border-bottom:none;margin-top:6px;padding-top:14px">
+        <div class="bar-label" style="color:var(--gold-l)">Total de mídia</div>
+        <div class="bar-track"><div class="bar-fill" style="width:100%;background:linear-gradient(90deg,#c9a84c,#e2c27d)"></div></div>
+        <div class="bar-val" style="color:var(--gold-l)">R$ 5.547,86</div>
+        <div class="bar-pct" style="color:var(--gold)">100%</div>
+      </div>
+    </div>
+    <div class="card donut">
+      <div class="donut-wrap">
+        <svg width="180" height="180" viewBox="0 0 180 180">
+          <circle cx="90" cy="90" r="70" fill="none" stroke="#c9a84c" stroke-width="26" stroke-dasharray="269.44 170.38" stroke-dashoffset="0" transform="rotate(-90 90 90)"/>
+          <circle cx="90" cy="90" r="70" fill="none" stroke="#4a7fa5" stroke-width="26" stroke-dasharray="170.38 269.44" stroke-dashoffset="-269.44" transform="rotate(-90 90 90)"/>
+        </svg>
+        <div class="donut-c"><div class="dc-v">R$ 4.897</div><div class="dc-l">Meta + serviço</div></div>
+      </div>
+      <div class="lgs">
+        <div class="lg"><span class="dot" style="background:#c9a84c"></span><span class="lg-n">Meta Ads</span><span class="lg-v">61,3%</span></div>
+        <div class="lg"><span class="dot" style="background:#4a7fa5"></span><span class="lg-n">Prestação de serviço</span><span class="lg-v">38,7%</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="note">
+  <span class="note-i">📣</span>
+  <div class="note-t">
+    O investimento direto em marketing somou <b>R$ 4.897</b> — R$ 3.000 em Meta Ads
+    (Instagram e Facebook, que alimentam reservas no salão e o delivery) e R$ 1.897 de
+    prestação de serviço. Somando os <b>R$ 650,86</b> de anúncios dentro do iFood, o total
+    de mídia do mês foi <b>R$ 5.547,86</b> — cerca de <b>1,9%</b> da receita bruta.
+  </div>
+</div>
+
+<div class="sec">
+  <div class="sec-h"><span class="sec-t">Leitura do investimento</span><div class="sec-l"></div></div>
+  <div class="ins">
+    <div class="ins-c good">
+      <div class="ins-t">Mídia enxuta para o porte</div>
+      <div class="ins-d">Investir <b>~1,9% da receita</b> em mídia é baixo para restaurante (o comum fica entre 3% e 6%). Há folga para escalar o que já dá retorno — como o iFood Ads, que rende <b>11,6x</b>.</div>
+    </div>
+    <div class="ins-c">
+      <div class="ins-t">Meta Ads trabalha os dois canais</div>
+      <div class="ins-d">Os R$ 3.000 em Instagram/Facebook aparecem indiretamente: em reservas no salão e na busca pela marca no iFood. Não há atribuição direta desses pedidos — vale registrar "vim pelo Instagram" no atendimento para medir.</div>
+    </div>
+    <div class="ins-c warn">
+      <div class="ins-t">Gestão é 52% da mídia veiculada</div>
+      <div class="ins-d">R$ 1.897 de prestação de serviço para R$ 3.651 anunciados (Meta + iFood). Faz sentido enquanto o resultado cresce; se a verba de veiculação aumentar, o peso relativo da gestão cai e a conta melhora.</div>
+    </div>
+  </div>
+</div>
+
+</div><!-- /pane mkt -->
 
 <div class="ft">
   <div class="ft-n">Restaurante Benvindo · Fechamento Julho 2026</div>
