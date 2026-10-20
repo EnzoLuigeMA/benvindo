@@ -7,6 +7,8 @@
     { "src": "/dashboard", "dest": "/dashboard.html" },
     { "src": "/dia-dos-pais", "dest": "/dia-dos-pais.html" },
     { "src": "/pais", "dest": "/dia-dos-pais.html" },
-    { "src": "/fechamento07", "dest": "/fechamento07.html" }
+    { "src": "/fechamento07", "dest": "/fechamento07.html" },
+    { "src": "/restaurant-week", "dest": "/restaurant-week.html" },
+    { "src": "/rw", "dest": "/restaurant-week.html" }
   ]
 }
