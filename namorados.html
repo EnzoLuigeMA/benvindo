@@ -84,6 +84,8 @@
     transition: opacity 0.2s;
   }
   .back-btn:hover { opacity: 1; }
+  /* no celular, sobe o botao para nao encostar no texto do cabecalho */
+  @media (max-width: 480px) { .back-btn { top: 10px; } }
 
   .header-heart {
     font-size: 28px;
